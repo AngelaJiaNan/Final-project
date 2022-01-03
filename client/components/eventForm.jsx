@@ -71,7 +71,7 @@ export default class EventForm extends React.Component {
   }
 
   handleDate(date) {
-    console.log(date);
+    // console.log(date);
     this.setState({
       date: date
     });
@@ -89,65 +89,70 @@ export default class EventForm extends React.Component {
   }
 
   handleApiLoaded(map, maps) {
-    console.log('Map: ', map, maps);
+    // console.log('Map: ', map, maps);
   }
 
   render() {
     // console.log('state:', this.state);
     return (
+      <>
+      <div className='header'>
+        <h2>Run With Me</h2>
+          <i className='fas fa-running' id='running-man'></i>
+      </div>
       <div className='container'>
-      <form onSubmit={this.handleSubmit}>
-        <div className='form-inputs'>
-        <label>Event Title</label>
-        <input
-        name="title"
-        type="text"
-        id="eventTitle"
-        value={this.state.title}
-        onChange={this.handleChange}/>
-        </div>
-        <div className='form-inputs'>
-          <label>Pick a Date</label>
-          <DatePicker selected={this.state.date}
-          onChange={date => this.handleDate(date)}
-          />
-        </div>
-        <div className='form-inputs'>
-          <label>Starting Time</label>
-          <input
-          name="startingtime"
-          type="time"
-          id="startingTime"
-          value={this.state.startingtime}
-          onChange={this.handleChange}/>
-        </div>
-        <div className='form-inputs'>
-          <label>Pick a Place</label>
-          <input
-          name="address"
-          type="text"
-          id="address"
-          value={this.state.address}
-          onChange={this.handleAddress}/>
-        </div>
-        <div className='form-inputs'>
-          <label>City</label>
-          <input
-          name="city"
-          type="text"
-          id="city"
-          value={this.state.city}
-          onChange={this.handleCity}/>
-        </div>
-        <div className='form-inputs'>
-          <label>State</label>
-          <input
-          name="state"
-          type="text"
-          id="state"
-          value={this.state.state}
-          onChange={this.handleState}/>
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <div className='form-inputs'>
+            <label>Event Title</label>
+              <input
+              name="title"
+              type="text"
+              id="eventTitle"
+              value={this.state.title}
+              onChange={this.handleChange}/>
+          </div>
+          <div className='form-inputs'>
+            <label>Pick a Date</label>
+              <DatePicker selected={this.state.date}
+               onChange={date => this.handleDate(date)}
+              />
+          </div>
+          <div className='form-inputs'>
+            <label>Starting Time</label>
+              <input
+              name="startingtime"
+              type="time"
+              id="startingTime"
+              value={this.state.startingtime}
+              onChange={this.handleChange}/>
+          </div>
+          <div className='form-inputs'>
+            <label>Pick a Place</label>
+              <input
+              name="address"
+              type="text"
+              id="address"
+              value={this.state.address}
+              onChange={this.handleAddress}/>
+          </div>
+          <div className='form-inputs'>
+            <label>City</label>
+              <input
+              name="city"
+              type="text"
+              id="city"
+              value={this.state.city}
+              onChange={this.handleCity}/>
+          </div>
+          <div className='form-inputs'>
+            <label>State</label>
+              <input
+              name="state"
+              type="text"
+              id="state"
+              value={this.state.state}
+              onChange={this.handleState}/>
+          </div>
           <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
@@ -163,6 +168,7 @@ export default class EventForm extends React.Component {
           </div>
       </form>
       </div>
+      </>
     );
   }
 }

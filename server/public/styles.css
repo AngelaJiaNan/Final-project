@@ -1,7 +1,7 @@
 .container {
   margin: auto;
   width: 60%;
-  padding: 10px;
+  padding: 30px;
 }
 
 form {
@@ -39,4 +39,24 @@ button[type="submit"]:hover {
 
 .submit-btn {
   text-align: center;
+}
+
+.header {
+  display: flex;
+  background-color: #343a40;
+  color: white;
+  border: 2px solid;
+  padding: 1px;
+  margin: -2px;
+}
+
+h2 {
+  padding-left: 25px;
+}
+
+#running-man {
+  color: white;
+  padding-left: 7px;
+  font-size: 29px;
+  padding-top: 20px;
 }
