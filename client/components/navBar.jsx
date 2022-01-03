@@ -4,7 +4,7 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <>
-      <nav onClick={this.handleClick} className='header'>
+      <nav className='header'>
         <div className="row">
           <div className="col-logo">
             <a>Run With Me</a>
@@ -12,8 +12,8 @@ export default class NavBar extends React.Component {
           </div>
           <div className='col-navitem'>
             <a href= '#Runs'>Runs</a>
-            <a href='#Events'>Events</a>
-            <a>Sign Out</a>
+            <a href='#Create'>Create Events</a>
+            <a>Sign In</a>
           </div>
         </div>
       </nav>
