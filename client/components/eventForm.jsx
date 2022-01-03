@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { Loader } from '@googlemaps/js-api-loader';
 import GoogleMapReact from 'google-map-react';
@@ -30,9 +29,6 @@ export default class EventForm extends React.Component {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({ [name]: value });
-    // '1382 44th ave, sf, ca'
-    // now it returns a []
-    // [1373, 44th ....]
   }
 
   handleAddress(event) {
@@ -56,8 +52,6 @@ export default class EventForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // console.log('Submitted Values:', this.state);
-    //
     const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
     // console.log('GEOLOCATION:', geolocation);
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)
@@ -74,14 +68,6 @@ export default class EventForm extends React.Component {
       )
       // .then(response => response.json())
       .then(() => { location.hash = '#'; });
-    // this.setState({
-    //   title: '',
-    //   date: '',
-    //   startingtime: '',
-    //   address: '',
-    //   city: '',
-    //   state: ''
-    // });
   }
 
   handleDate(date) {
@@ -107,11 +93,11 @@ export default class EventForm extends React.Component {
   }
 
   render() {
-    console.log('state:', this.state);
+    // console.log('state:', this.state);
     return (
-      <div>
+      <div className='container'>
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <div className='form-inputs'>
         <label>Event Title</label>
         <input
         name="title"
@@ -120,14 +106,13 @@ export default class EventForm extends React.Component {
         value={this.state.title}
         onChange={this.handleChange}/>
         </div>
-        <div>
+        <div className='form-inputs'>
           <label>Pick a Date</label>
           <DatePicker selected={this.state.date}
           onChange={date => this.handleDate(date)}
-          isClearable
-          placeholderText="I have been cleared!"/>
+          />
         </div>
-        <div>
+        <div className='form-inputs'>
           <label>Starting Time</label>
           <input
           name="startingtime"
@@ -136,7 +121,7 @@ export default class EventForm extends React.Component {
           value={this.state.startingtime}
           onChange={this.handleChange}/>
         </div>
-        <div>
+        <div className='form-inputs'>
           <label>Pick a Place</label>
           <input
           name="address"
@@ -145,7 +130,7 @@ export default class EventForm extends React.Component {
           value={this.state.address}
           onChange={this.handleAddress}/>
         </div>
-        <div>
+        <div className='form-inputs'>
           <label>City</label>
           <input
           name="city"
@@ -154,7 +139,7 @@ export default class EventForm extends React.Component {
           value={this.state.city}
           onChange={this.handleCity}/>
         </div>
-        <div>
+        <div className='form-inputs'>
           <label>State</label>
           <input
           name="state"
@@ -163,20 +148,20 @@ export default class EventForm extends React.Component {
           value={this.state.state}
           onChange={this.handleState}/>
         </div>
-          <div>
+          <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
+              center={this.state.mapLocation}
+              defaultZoom={13}
+              yesIWantToUseGoogleMapApiInternals
+              onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
+            >
+            </GoogleMapReact>
+          </div>
+          <div className='submit-btn'>
             <button type="submit">Create Event</button>
           </div>
       </form>
-      <div style={{ height: '50vh', width: '80%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
-            center={this.state.mapLocation}
-            defaultZoom={13}
-            yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
-            >
-          </GoogleMapReact>
-      </div>
       </div>
     );
   }
