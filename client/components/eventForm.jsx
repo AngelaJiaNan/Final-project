@@ -96,10 +96,6 @@ export default class EventForm extends React.Component {
     // console.log('state:', this.state);
     return (
       <>
-      <div className='header'>
-        <h2>Run With Me</h2>
-          <i className='fas fa-running' id='running-man'></i>
-      </div>
       <div className='container'>
         <form onSubmit={this.handleSubmit}>
           <div className='form-inputs'>
