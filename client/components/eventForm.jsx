@@ -96,7 +96,7 @@ export default class EventForm extends React.Component {
     // console.log('state:', this.state);
     return (
       <>
-      <div className='container'>
+      <div className='form-container'>
         <form onSubmit={this.handleSubmit}>
           <div className='form-inputs'>
             <label>Event Title</label>

@@ -1,6 +1,5 @@
-.container {
+.form-container {
   margin: auto;
-  width: 60%;
   padding: 30px;
 }
 
@@ -61,6 +60,7 @@ button[type="submit"]:hover {
 
 .col-logo {
   width: 50%;
+  font-size: 32px;
 }
 
 .col-navitem {
@@ -81,4 +81,8 @@ button[type="submit"]:hover {
 
 a {
   text-decoration: none;
+}
+
+label {
+  font-size: 18px;
 }
