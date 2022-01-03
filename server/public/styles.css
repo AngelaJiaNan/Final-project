@@ -44,7 +44,6 @@ button[type="submit"]:hover {
 .row {
   display: flex;
   background-color: #343a40;
-  color: white;
   border: 2px solid;
   padding: 10px;
   margin: -1px;
@@ -70,5 +69,16 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: space-evenly;
   padding-left: 25px;
+}
+
+.nav-items {
   color: #007bff;
+}
+
+.nav-logo {
+  color: white;
+}
+
+a {
+  text-decoration: none;
 }
