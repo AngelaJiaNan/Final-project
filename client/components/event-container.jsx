@@ -26,7 +26,7 @@ export default class EventContainer extends React.Component {
       <EventCard event={event} key={event.eventID}/>
     ));
     return (
-      <ul className='allEvents-container'>{allEvents}</ul>
+      <ul className='allevents-container'>{allEvents}</ul>
     );
   }
 }
