@@ -4,6 +4,7 @@ import EventForm from './components/eventForm';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
 import NavBar from './components/navBar';
+import EventDetails from './components/event-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,8 +30,13 @@ export default class App extends React.Component {
     if (route.path === '') {
       return <Home/>;
     }
-    if (route.path === 'Create') {
+    if (route.path === 'create') {
       return <EventForm/>;
+    }
+    if (route.path === 'events') {
+      const eventID = route.params.get('eventID');
+      console.log('eventID', eventID);
+      return <EventDetails eventID={eventID} />;
     }
     return <NotFound />;
   }
