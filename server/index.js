@@ -23,11 +23,11 @@ app.post('/api/events', (req, res) => {
   console.log('body: ', body);
   const userID = 1;
   const sql = `
-  insert into "events" ("title", "date","address", "lat", "lng", "startingtime", "userID")
-  values ($1, $2, $3, $4, $5, $6, $7)
+  insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
+  values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   returning *
   `;
-  const params = [body.title, body.date, body.address, body.lat, body.lng, body.startingtime, userID];
+  const params = [body.title, body.date, body.address, body.city, body.state, body.lat, body.lng, body.startingtime, userID];
   db.query(sql, params)
     .then(result => {
       const event = result.rows[0];

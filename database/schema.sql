@@ -22,6 +22,8 @@ CREATE TABLE "events" (
 	"title" TEXT NOT NULL,
 	"date" DATE,
 	"address" TEXT,
+  "city" TEXT,
+  "state" TEXT,
 	"lat" DECIMAL,
 	"lng" DECIMAL,
 	"startingtime" TIME,
