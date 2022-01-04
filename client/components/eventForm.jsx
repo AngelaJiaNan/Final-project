@@ -34,14 +34,12 @@ export default class EventForm extends React.Component {
   handleAddress(event) {
     const address = event.target.value;
     const geoAddress = address.split(' ').join('+');
-    // console.log(geoAddress);
     this.setState({ address: geoAddress });
   }
 
   handleCity(event) {
     const city = event.target.value;
     const geoCity = city.split(' ').join('+');
-    // console.log('ADDRESSSTATE:', geoCity);
     this.setState({ city: geoCity });
   }
 
@@ -53,7 +51,6 @@ export default class EventForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
-    // console.log('GEOLOCATION:', geolocation);
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)
       .then(response => response.json()).then(data => data.results[0].geometry.location).then(geoLatlon => {
         this.setState({ mapLocation: geoLatlon });
@@ -71,7 +68,6 @@ export default class EventForm extends React.Component {
   }
 
   handleDate(date) {
-    // console.log(date);
     this.setState({
       date: date
     });
@@ -89,11 +85,9 @@ export default class EventForm extends React.Component {
   }
 
   handleApiLoaded(map, maps) {
-    // console.log('Map: ', map, maps);
   }
 
   render() {
-    // console.log('state:', this.state);
     return (
       <>
       <div className='form-container'>
@@ -153,7 +147,7 @@ export default class EventForm extends React.Component {
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
               center={this.state.mapLocation}
-              defaultZoom={13}
+              defaultZoom={11}
               yesIWantToUseGoogleMapApiInternals
               onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
             >

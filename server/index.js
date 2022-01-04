@@ -39,6 +39,16 @@ app.post('/api/events', (req, res) => {
     });
 });
 
+app.get('/api/events', (req, res, next) => {
+  const sql = `
+  select *
+  from "events"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
