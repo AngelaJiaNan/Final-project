@@ -35,6 +35,7 @@ export default class App extends React.Component {
     }
     if (route.path === 'events') {
       const eventID = route.params.get('eventID');
+      console.log('ID:', eventID);
       return <EventDetails eventID={eventID} />;
     }
     return <NotFound />;
