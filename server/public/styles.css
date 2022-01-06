@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .form-container {
   margin: auto;
   padding: 30px;
@@ -79,10 +83,6 @@ button[type="submit"]:hover {
   color: white;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   font-size: 18px;
 }
@@ -115,4 +115,37 @@ h3 {
   padding: 70px;
 }
 
+.backbtn {
+  color: darkgray;
+}
 
+#back-icon {
+  color: darkgray;
+  padding-left: 7px;
+  font-size: 29px;
+  padding-top: 25px;
+}
+
+.eventdetail-container {
+  border: solid white;
+  margin: auto;
+  padding: 10px;
+  width: 60%;
+  margin-top: 35px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height: 81vh;
+}
+
+.event-infor {
+  text-align: center;
+}
+
+#edit-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
