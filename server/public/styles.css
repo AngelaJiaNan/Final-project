@@ -140,7 +140,7 @@ h3 {
   text-align: center;
 }
 
-#edit-btn {
+.edit-btn {
   background-color: #007bff;
   border: none;
   color: white;

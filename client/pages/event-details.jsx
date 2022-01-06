@@ -53,7 +53,7 @@ export default class EventDetails extends React.Component {
           </div>
           </div>
           <div className='submit-btn'>
-        <button id='edit-btn'>Edit Events</button>
+          <a className='edit-btn' href={`#edit?eventID=${this.state.eventID}`}>Edit Events</a>
         </div>
       </div>
     );
