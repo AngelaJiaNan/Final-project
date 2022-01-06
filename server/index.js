@@ -50,10 +50,11 @@ app.get('/api/events', (req, res, next) => {
 });
 
 app.get('/api/events/:eventID', (req, res, next) => {
-  const sql = `
-  select *
-  from "events"`;
-  db.query(sql)
+  const eventID = req.params.eventID;
+  console.log(eventID);
+  const sql = 'select * from "events" where "eventID" = $1';
+  const params = [eventID];
+  db.query(sql, params)
     .then(result => res.json(result.rows[0]))
     .catch(err => next(err));
 });
