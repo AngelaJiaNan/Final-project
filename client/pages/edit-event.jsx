@@ -31,7 +31,7 @@ export default class EditEvent extends React.Component {
         this.setState({ event: data });
       })
       .catch(err => {
-        console.error('There is a error', err);
+        alert('There is a error ' + err);
       });
   }
 
