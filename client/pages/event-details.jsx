@@ -12,7 +12,12 @@ export default class EventDetails extends React.Component {
   componentDidMount() {
     fetch(`/api/events/${this.props.eventID}`)
       .then(res => res.json())
-      .then(data => this.setState({ event: data }));
+      .then(data => {
+        this.setState({ event: data });
+      })
+      .catch(err => {
+        alert('There is a error ' + err);
+      });
   }
 
   render() {

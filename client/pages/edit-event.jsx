@@ -106,7 +106,12 @@ export default class EditEvent extends React.Component {
         });
       }
       )
-      .then(() => { location.hash = '#'; });
+      .then(() => {
+        location.hash = '#';
+      })
+      .catch(err => {
+        alert('There is a error ' + err);
+      });
   }
 
   render() {
