@@ -18,7 +18,7 @@ export default class EventDetails extends React.Component {
   render() {
     // console.log(this.state.event);
     if (!this.state.event) return null;
-    const { title, date, startingtime, address, city, state, lat, lng } = this.state.event;
+    const { title, date, startingtime, address, city, state, lat, lng, eventID } = this.state.event;
     console.log(this.state);
     const modlat = parseInt(lat);
     const modlng = parseInt(lng);
@@ -53,7 +53,7 @@ export default class EventDetails extends React.Component {
           </div>
           </div>
           <div className='submit-btn'>
-          <a className='edit-btn' href={`#edit?eventID=${this.state.eventID}`}>Edit Events</a>
+          <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
         </div>
       </div>
     );
