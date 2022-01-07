@@ -49,6 +49,53 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/events/:eventID', (req, res, next) => {
+  const eventID = req.params.eventID;
+  const sql = 'select * from "events" where "eventID" = $1';
+  const params = [eventID];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
+
+app.patch('/api/events/:eventID', (req, res, next) => {
+  const eventID = parseInt(req.params.eventID);
+  console.log(eventID);
+  const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
+  if (!Number.isInteger(eventID) || eventID <= 0) {
+    res.status(400).json({ Error: 'invalid id' });
+    return;
+  } else if (!title || !date || !address || !city || !state || !lat || !lng || !startingtime) {
+    res.status(400).json({ Error: 'All fiedls are required' });
+    return;
+  }
+  const sql = `
+  update "events"
+    set "title" = $1,
+    "date" = $2,
+    "address" = $3,
+    "city" = $4,
+    "state" = $5,
+    "lat" = $6,
+    "lng" = $7,
+    "startingtime" = $8
+  where "eventID" = $9
+  returning *
+  `;
+  const updatedValues = [title, date, address, city, state, lat, lng, startingtime, eventID];
+  db.query(sql, updatedValues)
+    .then(result => {
+      if (!result.rows[0]) {
+        res.status(404).json({ Erros: `Cannot find event with "eventID" ${eventID}` });
+      }
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ Error: 'An unexpected error occured' });
+    });
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);

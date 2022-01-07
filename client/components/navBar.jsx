@@ -11,8 +11,8 @@ export default class NavBar extends React.Component {
               <i className='fas fa-running' id='running-man'></i>
           </div>
           <div className='col-navitem'>
-            <a className='nav-items' href= '#Runs'>Runs</a>
-              <a className='nav-items'href='#Create'>Create Events</a>
+            <a className='nav-items' href= '#runs'>Runs</a>
+              <a className='nav-items'href='#create'>Create Events</a>
               <a className='nav-items' href='#'>Sign In
               </a>
           </div>

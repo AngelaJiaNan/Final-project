@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .form-container {
   margin: auto;
   padding: 30px;
@@ -79,10 +83,6 @@ button[type="submit"]:hover {
   color: white;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   font-size: 18px;
 }
@@ -103,7 +103,6 @@ label {
 .allevents-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   justify-content: space-evenly;
 }
 
@@ -113,5 +112,40 @@ h3 {
 
 .event-text {
   text-align: center;
-  padding: 70px;
+  padding: 4.375rem;
+}
+
+.backbtn {
+  color: darkgray;
+}
+
+#back-icon {
+  color: darkgray;
+  padding-left: 0.438rem;
+  font-size: 2rem;
+  padding-top: 1.563rem;
+}
+
+.eventdetail-container {
+  border: solid white;
+  margin: auto;
+  padding: 0.625rem;
+  width: 60%;
+  margin-top: 2rem;
+  box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+  height: 81vh;
+}
+
+.event-infor {
+  text-align: center;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.625rem 2rem;
+  text-decoration: none;
+  margin: 0.25rem 0.125rem;
+  cursor: pointer;
 }
