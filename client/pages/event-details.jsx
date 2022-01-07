@@ -1,12 +1,19 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import Delete from '../components/delete';
 
 export default class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: null
+      event: null,
+      showModal: false
     };
+    this.modalOpen = this.modalOpen.bind(this);
+  }
+
+  modalOpen() {
+    this.setState({ showModal: true });
   }
 
   componentDidMount() {
@@ -21,6 +28,7 @@ export default class EventDetails extends React.Component {
   }
 
   render() {
+    console.log('DELETE:', this.state);
     if (!this.state.event) return null;
     const { title, date, startingtime, address, city, state, lat, lng, eventID } = this.state.event;
     const modlat = parseInt(lat);
@@ -56,8 +64,10 @@ export default class EventDetails extends React.Component {
           </div>
           </div>
           <div className='submit-btn'>
+          <button onClick={this.modalOpen}>Delete</button>
           <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
         </div>
+        {this.state.showModal && <Delete/>}
       </div>
     );
   }
