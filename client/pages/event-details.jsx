@@ -19,7 +19,6 @@ export default class EventDetails extends React.Component {
     // console.log(this.state.event);
     if (!this.state.event) return null;
     const { title, date, startingtime, address, city, state, lat, lng, eventID } = this.state.event;
-    console.log(this.state);
     const modlat = parseInt(lat);
     const modlng = parseInt(lng);
     const mapCoordinates = { lat: modlat, lng: modlng };
@@ -47,7 +46,7 @@ export default class EventDetails extends React.Component {
           <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
             center={mapCoordinates}
-            defaultZoom={10}
+            defaultZoom={11}
           >
           </GoogleMapReact>
           </div>

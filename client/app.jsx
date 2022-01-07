@@ -40,7 +40,6 @@ export default class App extends React.Component {
     }
     if (route.path === 'edit') {
       const eventID = route.params.get('eventID');
-      console.log('app.jsx ', eventID);
       return <EditEvent eventID={eventID} />;
     }
     return <NotFound />;
