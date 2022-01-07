@@ -38,7 +38,6 @@ export default class EditEvent extends React.Component {
         [name]: value
       }
     });
-    console.log('NAME:', name);
   }
 
   handleDate(date) {
@@ -101,8 +100,6 @@ export default class EditEvent extends React.Component {
   }
 
   render() {
-    console.log('edit state: ', this.state.event);
-
     return (
       <>
         <div className='form-container'>

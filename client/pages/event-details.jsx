@@ -16,7 +16,6 @@ export default class EventDetails extends React.Component {
   }
 
   render() {
-    // console.log(this.state.event);
     if (!this.state.event) return null;
     const { title, date, startingtime, address, city, state, lat, lng, eventID } = this.state.event;
     const modlat = parseInt(lat);
