@@ -27,7 +27,12 @@ export default class EditEvent extends React.Component {
   componentDidMount() {
     fetch(`/api/events/${this.props.eventID}`)
       .then(res => res.json())
-      .then(data => this.setState({ event: data }));
+      .then(data => {
+        this.setState({ event: data });
+      })
+      .catch(err => {
+        console.error('There is a error', err);
+      });
   }
 
   handleChange(event) {
