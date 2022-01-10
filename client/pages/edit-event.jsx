@@ -13,8 +13,7 @@ export default class EditEvent extends React.Component {
         city: '',
         state: '',
         mapLocation: { }
-      },
-      showModal: false
+      }
     };
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -85,10 +84,6 @@ export default class EditEvent extends React.Component {
         state: state
       }
     });
-  }
-
-  modalOpen() {
-    this.setState({ showModal: !this.state.showModal });
   }
 
   handleUpdate(event) {
@@ -170,9 +165,9 @@ export default class EditEvent extends React.Component {
                 defaultValue={this.state.event.state}
                 onChange={this.handleState} />
             </div>
-            <div className='submit-btn'>
-              <button onClick={this.modalOpen}>Delete</button>
-              <button type="submit">Edit Event</button>
+            <div className='event-btn'>
+              <button className='delete-btn'>Cancel</button>
+              <button className='edit-btn' type="submit">Edit Event</button>
             </div>
           </form>
         </div>

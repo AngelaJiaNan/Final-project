@@ -1,12 +1,16 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import Delete from '../components/delete';
 
 export default class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: null
+      event: null,
+      showModal: false
     };
+    this.modalOpen = this.modalOpen.bind(this);
+    this.modalClose = this.modalClose.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +22,14 @@ export default class EventDetails extends React.Component {
       .catch(err => {
         alert('There is a error ' + err);
       });
+  }
+
+  modalOpen() {
+    this.setState({ showModal: true });
+  }
+
+  modalClose() {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -32,6 +44,8 @@ export default class EventDetails extends React.Component {
     const cityState = `${modCity}, ${state}`;
 
     return (
+      <div>
+        {this.state.showModal && <Delete eventID={eventID} modalOpen={this.modalOpen} modalClose={this.modalClose} />}
       <div className='eventdetail-container'>
           <a className='backbtn' href="#">
           &lt; Back to event
@@ -50,14 +64,16 @@ export default class EventDetails extends React.Component {
           <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
             center={mapCoordinates}
-            defaultZoom={11}
+            defaultZoom={9}
           >
           </GoogleMapReact>
           </div>
           </div>
-          <div className='submit-btn'>
+          <div className='event-btn'>
+          <button className='delete-btn' onClick={this.modalOpen}>Delete</button>
           <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
         </div>
+      </div>
       </div>
     );
   }

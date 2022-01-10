@@ -63,7 +63,6 @@ export default class EventForm extends React.Component {
         });
       }
       )
-      // .then(response => response.json())
       .then(() => { location.hash = '#'; });
   }
 
@@ -147,7 +146,7 @@ export default class EventForm extends React.Component {
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
               center={this.state.mapLocation}
-              defaultZoom={11}
+              defaultZoom={10}
               yesIWantToUseGoogleMapApiInternals
               onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
             >

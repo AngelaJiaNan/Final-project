@@ -13,11 +13,8 @@ export default class EventContainer extends React.Component {
     fetch('/api/events')
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          events: data
-        });
-      })
-      .catch(err => console.error('Unexpected Error has Occured', err));
+        this.setState({ events: data });
+      });
   }
 
   render() {

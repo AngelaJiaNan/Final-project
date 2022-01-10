@@ -12,6 +12,7 @@ const db = new pg.Pool({
 });
 const jsonMiddleWare = express.json();
 const app = express();
+
 app.use(jsonMiddleWare);
 
 app.use(staticMiddleware);
@@ -20,7 +21,6 @@ app.use(errorMiddleware);
 
 app.post('/api/events', (req, res) => {
   const body = req.body;
-  console.log('body: ', body);
   const userID = 1;
   const sql = `
   insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
@@ -60,7 +60,6 @@ app.get('/api/events/:eventID', (req, res, next) => {
 
 app.patch('/api/events/:eventID', (req, res, next) => {
   const eventID = parseInt(req.params.eventID);
-  console.log(eventID);
   const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
   if (!Number.isInteger(eventID) || eventID <= 0) {
     res.status(400).json({ Error: 'invalid id' });
@@ -91,6 +90,32 @@ app.patch('/api/events/:eventID', (req, res, next) => {
       res.status(200).json(result.rows[0]);
     })
     .catch(err => {
+      console.error(err);
+      res.status(500).json({ Error: 'An unexpected error occured' });
+    });
+});
+
+app.delete('/api/events/:eventID', (req, res, next) => {
+  const deleteId = Number(req.params.eventID);
+  console.log(deleteId);
+  if (!Number.isInteger(deleteId)) {
+    res.status(400).json({ Error: 'Invalid eventId' });
+    return;
+  }
+  const sql = `delete from "events"
+                      where "eventID" = $1
+                      returning *`;
+  const values = [deleteId];
+  db.query(sql, values)
+    .then(result => {
+      console.log('result delete: ', result);
+      const deletedEvent = result;
+      if (!deletedEvent) {
+        res.status(400).json({ Error: `Cannot find event at eventID ${deleteId} ` });
+      } else {
+        res.status(204).json(values);
+      }
+    }).catch(err => {
       console.error(err);
       res.status(500).json({ Error: 'An unexpected error occured' });
     });

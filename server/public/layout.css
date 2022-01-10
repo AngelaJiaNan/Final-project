@@ -1,6 +1,10 @@
-@media screen and (min-width: 350px) {
+@media screen and (max-width: 350px) {
   .form-container {
     width: 60%;
+  }
+
+  .modal-text {
+    width: 100%;
   }
 }
 
