@@ -16,6 +16,10 @@ export default class EventDetails extends React.Component {
     this.setState({ showModal: true });
   }
 
+  modalClose() {
+    this.setState({ showModal: false });
+  }
+
   componentDidMount() {
     fetch(`/api/events/${this.props.eventID}`)
       .then(res => res.json())
@@ -40,6 +44,8 @@ export default class EventDetails extends React.Component {
     const cityState = `${modCity}, ${state}`;
 
     return (
+      <div>
+        {this.state.showModal && <Delete />}
       <div className='eventdetail-container'>
           <a className='backbtn' href="#">
           &lt; Back to event
@@ -63,11 +69,11 @@ export default class EventDetails extends React.Component {
           </GoogleMapReact>
           </div>
           </div>
-          <div className='submit-btn'>
-          <button onClick={this.modalOpen}>Delete</button>
+          <div className='event-btn'>
+          <button className='delete-btn' onClick={this.modalOpen}>Delete</button>
           <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
         </div>
-        {this.state.showModal && <Delete/>}
+      </div>
       </div>
     );
   }

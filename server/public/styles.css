@@ -149,3 +149,48 @@ h3 {
   margin: 0.25rem 0.125rem;
   cursor: pointer;
 }
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.event-btn {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 14rem;
+}
+
+.delete-btn {
+  border: none;
+  background: none;
+  font-size: 1 rem;
+  font-size: 1.1rem;
+  color: red;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  text-decoration: underline;
+}
+
+.modal-container {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-top: 12rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.delete-modal {
+  background-color: white;
+  width: 40%;
+  height: 35%;
+  border-radius: 1.5 rem;
+  padding: 3rem;
+  text-align: center;
+  margin: 5% auto 15%;
+}

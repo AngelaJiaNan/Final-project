@@ -86,10 +86,6 @@ export default class EditEvent extends React.Component {
     });
   }
 
-  modalOpen() {
-    this.setState({ showModal: !this.state.showModal });
-  }
-
   handleUpdate(event) {
     event.preventDefault();
     const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
@@ -169,8 +165,9 @@ export default class EditEvent extends React.Component {
                 defaultValue={this.state.event.state}
                 onChange={this.handleState} />
             </div>
-            <div className='submit-btn'>
-              <button type="submit">Edit Event</button>
+            <div className='event-btn'>
+              <button className='delete-btn'>Cancel</button>
+              <button className='edit-btn' type="submit">Edit Event</button>
             </div>
           </form>
         </div>
