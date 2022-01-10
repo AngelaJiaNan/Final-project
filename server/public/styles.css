@@ -5,6 +5,7 @@ a {
 .form-container {
   margin: auto;
   padding: 30px;
+  width: 60%;
 }
 
 form {

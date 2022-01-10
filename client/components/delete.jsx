@@ -8,20 +8,21 @@ export default class Delete extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleDelete(event) {
+  handleDelete() {
     event.preventDefault();
     fetch(`/api/events/${this.props.eventID}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-      .then(response => response.json())
-      .then(data => console.log(data));
+    }).then(response => {
+      if (!response.error) {
+        this.props.modalClose();
+      }
+    });
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className='modal-container'>

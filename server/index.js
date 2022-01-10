@@ -108,7 +108,8 @@ app.delete('/api/events/:eventID', (req, res, next) => {
   const values = [deleteId];
   db.query(sql, values)
     .then(result => {
-      const deletedEvent = result.row[0];
+      console.log('result delete: ', result);
+      const deletedEvent = result;
       if (!deletedEvent) {
         res.status(400).json({ Error: `Cannot find event at eventID ${deleteId} ` });
       } else {
