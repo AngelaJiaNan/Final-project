@@ -6,6 +6,7 @@ import { parseRoute } from './lib';
 import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
+import RunForm from './components/run-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -41,6 +42,9 @@ export default class App extends React.Component {
     if (route.path === 'edit') {
       const eventID = route.params.get('eventID');
       return <EditEvent eventID={eventID} />;
+    }
+    if (route.path === 'runs') {
+      return <RunForm/>;
     }
     return <NotFound />;
   }
