@@ -32,22 +32,22 @@ export default class RunForm extends React.Component {
   }
 
   render() {
-    // console.log('STATES:', this.state);
+    console.log('STATES:', this.state);
     return (
     <>
     <div>
       <div>
         <h1>New Run</h1>
         </div>
-        <div>
+          <div className='form-container'>
             <form onSubmit={this.handleSubmit}>
-          <div>
+              <div className='form-inputs'>
             <label>Date</label>
               <DatePicker selected={this.state.date}
                 onChange={date => this.handleDate(date)}
               />
           </div>
-          <div>
+              <div className='form-inputs'>
             <label>Duration</label>
             <input
             name="duration"
@@ -56,7 +56,7 @@ export default class RunForm extends React.Component {
             value={this.state.duration}
             onChange={this.handleChange} />
           </div>
-          <div>
+              <div className='form-inputs'>
             <label>Distance</label>
             <input
             name="distance"
@@ -65,7 +65,7 @@ export default class RunForm extends React.Component {
             value={this.state.distance}
             onChange={this.handleChange} />
           </div>
-            <div>
+              <div className='submit-btn'>
               <button type='submit'>Add Run</button>
             </div>
         </form>

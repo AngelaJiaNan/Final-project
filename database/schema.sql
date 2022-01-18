@@ -40,7 +40,6 @@ CREATE TABLE "runninglogs" (
 	"duration" DECIMAL NOT NULL,
 	"distance" integer NOT NULL,
 	"userID" integer NOT NULL,
-	"startingtime" TIME NOT NULL,
 	CONSTRAINT "runninglogs_pk" PRIMARY KEY ("runninglogID")
 ) WITH (
   OIDS=FALSE

@@ -97,7 +97,6 @@ app.patch('/api/events/:eventID', (req, res, next) => {
 
 app.delete('/api/events/:eventID', (req, res, next) => {
   const deleteId = Number(req.params.eventID);
-  console.log(deleteId);
   if (!Number.isInteger(deleteId)) {
     res.status(400).json({ Error: 'Invalid eventId' });
     return;
@@ -108,7 +107,6 @@ app.delete('/api/events/:eventID', (req, res, next) => {
   const values = [deleteId];
   db.query(sql, values)
     .then(result => {
-      console.log('result delete: ', result);
       const deletedEvent = result;
       if (!deletedEvent) {
         res.status(400).json({ Error: `Cannot find event at eventID ${deleteId} ` });
@@ -118,6 +116,26 @@ app.delete('/api/events/:eventID', (req, res, next) => {
     }).catch(err => {
       console.error(err);
       res.status(500).json({ Error: 'An unexpected error occured' });
+    });
+});
+
+app.post('api/runninglogs', (req, res, next) => {
+  const body = req.body;
+  const userID = 1;
+  const sql = `
+  insert into "runninglogs" ("date","distance", "duration", "userID")
+  values ($1, $2, $3, $4)
+  returning *
+  `;
+  const params = [body.date, body.distance, body.duration, userID];
+  db.query(sql, params)
+    .then(result => {
+      const runninglogs = result.rows[0];
+      res.status(201).json(runninglogs);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'An unexpected error has occured' });
     });
 });
 
