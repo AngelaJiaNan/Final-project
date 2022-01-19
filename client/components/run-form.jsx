@@ -48,6 +48,7 @@ export default class RunForm extends React.Component {
           duration: '',
           distance: ''
         });
+        this.props.togglerunform();
       })
       .catch(err => {
         throw err;
@@ -56,6 +57,8 @@ export default class RunForm extends React.Component {
 
   render() {
     return (
+      <div className='modal-container'>
+        <div className='form-modal'>
           <div className='form-container'>
             <form onSubmit={this.handleSubmit}>
               <div className='form-inputs'>
@@ -81,11 +84,14 @@ export default class RunForm extends React.Component {
                 value={this.state.distance}
                 onChange={this.handleDistance} />
               </div>
-              <div className='submit-btn'>
+              <div className='event-btn'>
+                <button className='edit-btn' onClick={this.props.togglerunform}>Cancel</button>
                 <button type='submit'>Add Run</button>
               </div>
             </form>
       </div>
+      </div>
+    </div>
     );
   }
 }

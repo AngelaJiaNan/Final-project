@@ -28,12 +28,11 @@ export default class Runninglog extends React.Component {
   }
 
   render() {
-    // const newDate = this.state.runninglogs.date.split('T')[0];
     const listRuns = this.state.runninglogs.map(runninglog => {
       return <div className='event-card' key={runninglog.runninglogID}>
                 <div className='event-text'>
                   <p>Date: </p>
-                  {runninglog.date}
+          {runninglog.date.split('T')[0]}
                   <p>Duration: </p>
                   {runninglog.duration}
                   <p>Distance: </p>
@@ -42,16 +41,16 @@ export default class Runninglog extends React.Component {
               </div>;
     });
     return (
-      <>
-      <div className="header">
-        <h1>All Logged Runs</h1>
-        <i onClick={this.togglerunform} className="fas fa-plus-circle"></i>
-        {this.state.showrunform && <RunForm />}
+      <div className="running-container">
+      <div className="header-runpage">
+        <h1>Logged Runs</h1>
+        <i onClick={this.togglerunform} className="fas fa-plus-circle" id="new"></i>
+          {this.state.showrunform && <RunForm togglerunform={this.togglerunform}/>}
       </div>
       <div>
           <ul className='allevents-container'>{listRuns}</ul>
       </div>
-      </>
+      </div>
     );
   }
 }

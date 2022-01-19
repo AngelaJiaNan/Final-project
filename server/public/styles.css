@@ -105,6 +105,7 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 2rem;
 }
 
 h3 {
@@ -191,6 +192,26 @@ h3 {
   width: 40%;
   height: 35%;
   border-radius: 1.5 rem;
+  padding: 3rem;
+  text-align: center;
+  margin: 5% auto 15%;
+}
+
+.header-runpage {
+  display: flex;
+  padding: 10px;
+  margin-left: 30px;
+}
+
+#new {
+  padding-left: 7px;
+  font-size: 29px;
+  padding-top: 22px;
+}
+
+.form-modal {
+  background-color: white;
+  width: 60%;
   padding: 3rem;
   text-align: center;
   margin: 5% auto 15%;
