@@ -97,7 +97,6 @@ app.patch('/api/events/:eventID', (req, res, next) => {
 
 app.delete('/api/events/:eventID', (req, res, next) => {
   const deleteId = Number(req.params.eventID);
-  console.log(deleteId);
   if (!Number.isInteger(deleteId)) {
     res.status(400).json({ Error: 'Invalid eventId' });
     return;
@@ -108,7 +107,6 @@ app.delete('/api/events/:eventID', (req, res, next) => {
   const values = [deleteId];
   db.query(sql, values)
     .then(result => {
-      console.log('result delete: ', result);
       const deletedEvent = result;
       if (!deletedEvent) {
         res.status(400).json({ Error: `Cannot find event at eventID ${deleteId} ` });
@@ -120,6 +118,65 @@ app.delete('/api/events/:eventID', (req, res, next) => {
       res.status(500).json({ Error: 'An unexpected error occured' });
     });
 });
+
+app.post('/api/runninglogs', (req, res, next) => {
+  const { date, distance, duration } = req.body;
+  const userID = 1;
+  const sql = `
+  insert into "runninglogs" ("date","distance", "duration", "userID")
+  values ($1, $2, $3, $4)
+  returning "runninglogID"
+  `;
+  const params = [date, distance, duration, userID];
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.row);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'An unexpected error has occured' });
+    });
+});
+
+app.get('/api/runninglogs', (req, res, next) => {
+  const sql = `
+  select *
+  from "runninglogs"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+// app.delete('/api/runninglogs/:runninglogId', (req, res, next) => {
+//   const postId = parseInt(req.params.postId, 10);
+//   if (!Number.isInteger(postId) || postId < 1) {
+//     res.status(400).json({
+//       error: 'postId must be a positive integer'
+//     });
+//     return;
+//   }
+//   const sql = `
+//     DELETE from "runninglogs"
+//      where "postId" = $1
+//      returning *
+//   `;
+//   const params = [postId];
+//   db.query(sql, params)
+//     .then(result => {
+//       const [post] = result.rows;
+//       if (!post) {
+//         res.status(404).json({
+//           error: `cannot find todo with todoId ${postId}`
+//         });
+//         return;
+//       }
+//       res.json(post);
+//     })
+//     .catch(err => {
+//       next(err);
+//     });
+// });
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console

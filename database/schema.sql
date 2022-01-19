@@ -5,6 +5,7 @@ set client_min_messages to warning;
 drop schema "public" cascade;
 
 create schema "public";
+
 CREATE TABLE "users" (
 	"userID" serial NOT NULL,
 	"email" TEXT NOT NULL UNIQUE,
@@ -37,10 +38,9 @@ CREATE TABLE "events" (
 CREATE TABLE "runninglogs" (
 	"runninglogID" serial NOT NULL,
 	"date" DATE NOT NULL,
-	"duration" DECIMAL NOT NULL,
-	"distance" integer NOT NULL,
+	"duration" TEXT NOT NULL,
+	"distance" TEXT NOT NULL,
 	"userID" integer NOT NULL,
-	"startingtime" TIME NOT NULL,
 	CONSTRAINT "runninglogs_pk" PRIMARY KEY ("runninglogID")
 ) WITH (
   OIDS=FALSE
