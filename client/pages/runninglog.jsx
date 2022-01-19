@@ -5,10 +5,20 @@ export default class Runninglog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      runninglogs: null,
+      runninglogs: [],
       showrunform: false
     };
     this.togglerunform = this.togglerunform.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('/api/runninglogs')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          runninglogs: data
+        });
+      });
   }
 
   togglerunform() {
@@ -18,13 +28,30 @@ export default class Runninglog extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // const newDate = this.state.runninglogs.date.split('T')[0];
+    const listRuns = this.state.runninglogs.map(runninglog => {
+      return <div className='event-card' key={runninglog.runninglogID}>
+                <div className='event-text'>
+                  <p>Date: </p>
+                  {runninglog.date}
+                  <p>Duration: </p>
+                  {runninglog.duration}
+                  <p>Distance: </p>
+                  {runninglog.distance}
+                </div>
+              </div>;
+    });
     return (
+      <>
       <div className="header">
         <h1>All Logged Runs</h1>
         <i onClick={this.togglerunform} className="fas fa-plus-circle"></i>
         {this.state.showrunform && <RunForm />}
       </div>
+      <div>
+          <ul className='allevents-container'>{listRuns}</ul>
+      </div>
+      </>
     );
   }
 }
