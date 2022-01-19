@@ -7,6 +7,7 @@ import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import RunForm from './components/run-form';
+import Runninglog from './pages/runninglog';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ export default class App extends React.Component {
       return <EditEvent eventID={eventID} />;
     }
     if (route.path === 'runs') {
-      return <RunForm/>;
+      return <Runninglog/>;
     }
     return <NotFound />;
   }
