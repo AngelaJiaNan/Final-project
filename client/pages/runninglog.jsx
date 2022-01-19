@@ -17,12 +17,6 @@ export default class Runninglog extends React.Component {
     });
   }
 
-  // closerunform() {
-  //   this.setState({
-  //     showrunform: false
-  //   });
-  // }
-
   render() {
     console.log(this.state);
     return (

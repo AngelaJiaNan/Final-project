@@ -138,6 +138,16 @@ app.post('/api/runninglogs', (req, res, next) => {
     });
 });
 
+app.get('/api/runninglogs', (req, res, next) => {
+  const sql = `
+  select *
+  from "runninglogs"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 // app.delete('/api/runninglogs/:runninglogId', (req, res, next) => {
 //   const postId = parseInt(req.params.postId, 10);
 //   if (!Number.isInteger(postId) || postId < 1) {
