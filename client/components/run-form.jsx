@@ -9,15 +9,10 @@ export default class RunForm extends React.Component {
       duration: '',
       distance: ''
     };
-    this.handleSumbit = this.handleSumbit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDate = this.handleDate.bind(this);
-  }
-
-  handleChange(event) {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({ [name]: value });
+    this.handleDistance = this.handleDistance.bind(this);
+    this.handleDuration = this.handleDuration.bind(this);
   }
 
   handleDate(date) {
@@ -26,34 +21,37 @@ export default class RunForm extends React.Component {
     });
   }
 
-  handleSumbit(event) {
-    event.preventDefault();
-    console.log('SUMBIT:', this.state.value);
+  handleDuration(event) {
+    this.setState({
+      duration: event.target.value
+    });
+  }
 
-    // const runningData = new FormData();
-    // runningData.append('date', this.state.date);
-    // runningData.append('duration', this.state.duration);
-    // runningData.append('distance', this.state.distance);
-    // console.log('RUNNINGLOG:', runningData);
-    // fetch('/api/runninglogs', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(this.state)
-    // })
-    //   .then(response => response.json())
-    //   .then(() => {
-    //     this.setState({
-    //       date: '',
-    //       duration: '',
-    //       distance: '',
-    //       finish: true
-    //     });
-    //   })
-    //   .catch(err => {
-    //     throw err;
-    //   });
+  handleDistance(event) {
+    this.setState({
+      distance: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    fetch('/api/runninglogs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(() => {
+        this.setState({
+          date: '',
+          duration: '',
+          distance: ''
+        });
+      })
+      .catch(err => {
+        throw err;
+      });
   }
 
   render() {
@@ -72,7 +70,7 @@ export default class RunForm extends React.Component {
                 type="text"
                 id="duration"
                 value={this.state.duration}
-                onChange={this.handleChange} />
+                onChange={this.handleDuration} />
               </div>
               <div className='form-inputs'>
                 <label>Distance</label>
@@ -81,7 +79,7 @@ export default class RunForm extends React.Component {
                 type="text"
                 id="distance"
                 value={this.state.distance}
-                onChange={this.handleChange} />
+                onChange={this.handleDistance} />
               </div>
               <div className='submit-btn'>
                 <button type='submit'>Add Run</button>
