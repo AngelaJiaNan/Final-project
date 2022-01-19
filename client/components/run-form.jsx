@@ -7,8 +7,7 @@ export default class RunForm extends React.Component {
     this.state = {
       date: '',
       duration: '',
-      distance: '',
-      startingtime: ''
+      distance: ''
     };
     this.handleSumbit = this.handleSumbit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,51 +26,68 @@ export default class RunForm extends React.Component {
     });
   }
 
-  handleSumbit() {
+  handleSumbit(event) {
     event.preventDefault();
+    console.log('SUMBIT:', this.state.value);
+
+    // const runningData = new FormData();
+    // runningData.append('date', this.state.date);
+    // runningData.append('duration', this.state.duration);
+    // runningData.append('distance', this.state.distance);
+    // console.log('RUNNINGLOG:', runningData);
+    // fetch('/api/runninglogs', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(this.state)
+    // })
+    //   .then(response => response.json())
+    //   .then(() => {
+    //     this.setState({
+    //       date: '',
+    //       duration: '',
+    //       distance: '',
+    //       finish: true
+    //     });
+    //   })
+    //   .catch(err => {
+    //     throw err;
+    //   });
   }
 
   render() {
-    console.log('STATES:', this.state);
     return (
-    <>
-    <div>
-      <div>
-        <h1>New Run</h1>
-        </div>
           <div className='form-container'>
             <form onSubmit={this.handleSubmit}>
               <div className='form-inputs'>
-            <label>Date</label>
-              <DatePicker selected={this.state.date}
-                onChange={date => this.handleDate(date)}
-              />
-          </div>
+                <label>Date</label>
+                  <DatePicker selected={this.state.date}
+                  onChange={date => this.handleDate(date)}/>
+              </div>
               <div className='form-inputs'>
-            <label>Duration</label>
-            <input
-            name="duration"
-            type="text"
-            id="duration"
-            value={this.state.duration}
-            onChange={this.handleChange} />
-          </div>
+                <label>Duration</label>
+                <input
+                name="duration"
+                type="text"
+                id="duration"
+                value={this.state.duration}
+                onChange={this.handleChange} />
+              </div>
               <div className='form-inputs'>
-            <label>Distance</label>
-            <input
-            name="distance"
-            type="text"
-            id="distance"
-            value={this.state.distance}
-            onChange={this.handleChange} />
-          </div>
+                <label>Distance</label>
+                <input
+                name="distance"
+                type="text"
+                id="distance"
+                value={this.state.distance}
+                onChange={this.handleChange} />
+              </div>
               <div className='submit-btn'>
-              <button type='submit'>Add Run</button>
-            </div>
-        </form>
+                <button type='submit'>Add Run</button>
+              </div>
+            </form>
       </div>
-    </div>
-    </>
     );
   }
 }
