@@ -1,5 +1,3 @@
 insert into "users"
-  ("email", "password")
+  ("username", "password")
   values ('demoUser', 'temp');
-
-
