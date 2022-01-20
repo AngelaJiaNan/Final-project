@@ -27,18 +27,38 @@ export default class Runninglog extends React.Component {
     });
   }
 
+  handleDeleterun(runninglogID) {
+    event.preventDefault();
+    fetch(`/api/runninglogs/${runninglogID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      if (!response.error) {
+        const newRunningLogs = this.state.runninglogs.filter(runninglog => runninglog.runninglogID !== runninglogID);
+        this.setState({
+          runninglogs: newRunningLogs
+        });
+      }
+    });
+  }
+
   render() {
     const listRuns = this.state.runninglogs.map(runninglog => {
       return <div className='event-card' key={runninglog.runninglogID}>
-                <div className='event-text'>
-                  <p>Date: </p>
-          {runninglog.date.split('T')[0]}
-                  <p>Duration: </p>
-                  {runninglog.duration}
-                  <p>Distance: </p>
-                  {runninglog.distance}
+                <div className='running-log'>
+                  <i onClick={() => this.handleDeleterun(runninglog.runninglogID)} className="far fa-trash-alt"></i>
+                    <div className='event-text'>
+                      <p>Date: </p>
+                      {runninglog.date.split('T')[0]}
+                      <p>Duration: </p>
+                      {runninglog.duration}
+                      <p>Distance: </p>
+                      {runninglog.distance}
+                    </div>
                 </div>
-              </div>;
+            </div>;
     });
     return (
       <div className="running-container">
