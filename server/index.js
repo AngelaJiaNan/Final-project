@@ -22,7 +22,6 @@ app.use(staticMiddleware);
 app.use(errorMiddleware);
 
 app.post('/api/auth/sign-up', (req, res, next) => {
-  console.log("BODY:", req.body);
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required fields');

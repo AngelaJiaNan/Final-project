@@ -22,7 +22,16 @@ export default class SignUp extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('STATE:', this.state);
+    fetch('/api/auth/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(response => response.json())
+      .then(result => { location.hash = '#signup'; })
+      .catch(err => console.error(err));
   }
 
   render() {
