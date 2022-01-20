@@ -148,35 +148,29 @@ app.get('/api/runninglogs', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// app.delete('/api/runninglogs/:runninglogId', (req, res, next) => {
-//   const postId = parseInt(req.params.postId, 10);
-//   if (!Number.isInteger(postId) || postId < 1) {
-//     res.status(400).json({
-//       error: 'postId must be a positive integer'
-//     });
-//     return;
-//   }
-//   const sql = `
-//     DELETE from "runninglogs"
-//      where "postId" = $1
-//      returning *
-//   `;
-//   const params = [postId];
-//   db.query(sql, params)
-//     .then(result => {
-//       const [post] = result.rows;
-//       if (!post) {
-//         res.status(404).json({
-//           error: `cannot find todo with todoId ${postId}`
-//         });
-//         return;
-//       }
-//       res.json(post);
-//     })
-//     .catch(err => {
-//       next(err);
-//     });
-// });
+app.delete('/api/runninglogs/:runninglogID', (req, res, next) => {
+  const runninglogId = parseInt(req.params.runninglogID);
+  if (!Number.isInteger(runninglogId)) {
+    res.status(400).json({ Error: 'Invalid runninglogId' });
+    return;
+  }
+  const sql = `delete from "runninglogs"
+                      where "runninglogID" = $1
+                      returning *`;
+  const values = [runninglogId];
+  db.query(sql, values)
+    .then(result => {
+      const deletedEvent = result;
+      if (!deletedEvent) {
+        res.status(400).json({ Error: `Cannot find event at eventID ${runninglogId} ` });
+      } else {
+        res.status(204).json(values);
+      }
+    }).catch(err => {
+      console.error(err);
+      res.status(500).json({ Error: 'An unexpected error occured' });
+    });
+});
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
