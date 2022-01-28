@@ -92,17 +92,6 @@ button[type="submit"]:hover {
   text-align: center;
 }
 
-/* .row {
-  display: flex;
-  background-color: #343a40;
-  border: 2px solid;
-  padding: 10px;
-  margin: -1px;
-  font-size: 20px;
-  padding-left: 25px;
-  padding-top: 26px;
-} */
-
 label {
   font-size: 18px;
 }
@@ -154,7 +143,7 @@ h3 {
   width: 60%;
   margin-top: 2rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
-  height: 81vh;
+  height: 100%;
 }
 
 .event-infor {
@@ -178,7 +167,8 @@ h3 {
 .event-btn {
   display: flex;
   justify-content: space-evenly;
-  gap: 14rem;
+  gap: 12rem;
+  padding: 1rem;
 }
 
 .delete-btn {
@@ -210,7 +200,7 @@ h3 {
   background-color: white;
   width: 40%;
   height: 35%;
-  border-radius: 1.5 rem;
+  border-radius: 1rem;
   padding: 3rem;
   text-align: center;
   margin: 5% auto 15%;
@@ -234,6 +224,7 @@ h3 {
   padding: 3rem;
   text-align: center;
   margin: 5% auto 15%;
+  border-radius: 2rem;
 }
 
 .sign-in {
@@ -250,6 +241,12 @@ h3 {
 .account-form {
   border: solid black;
   border-radius: 6px;
-  width: 50%;
+  width: 40%;
   padding: 2rem;
+  height: 40%;
+}
+
+.run-container {
+  margin: auto;
+  width: 60%;
 }

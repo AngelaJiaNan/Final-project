@@ -59,7 +59,7 @@ export default class RunForm extends React.Component {
     return (
       <div className='modal-container'>
         <div className='form-modal'>
-          <div className='form-container'>
+          <div className='run-container'>
             <form onSubmit={this.handleSubmit}>
               <div className='form-inputs'>
                 <label>Date</label>
