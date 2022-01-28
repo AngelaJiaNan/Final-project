@@ -122,7 +122,7 @@ h3 {
 
 .event-text {
   text-align: center;
-  padding: 4.375rem;
+  padding: 2rem;
 }
 
 .backbtn {
@@ -168,7 +168,7 @@ h3 {
   display: flex;
   justify-content: space-evenly;
   gap: 12rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .delete-btn {
@@ -222,10 +222,11 @@ h3 {
 .form-modal {
   background-color: white;
   width: 60%;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   margin: 5% auto 15%;
   border-radius: 2rem;
+  height: 63%;
 }
 
 .sign-in {
@@ -254,4 +255,10 @@ h3 {
 
 .account-header {
   padding-bottom: 2rem;
+}
+
+.delete-run {
+  color: red;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
 }

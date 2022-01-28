@@ -50,7 +50,7 @@ export default class SignUp extends React.Component {
               value ={this.state.username}
               onChange ={this.handleusername} />
           </div>
-          <div>
+          <div className='form-input'>
             <label>Password</label>
               <input
               name="password"

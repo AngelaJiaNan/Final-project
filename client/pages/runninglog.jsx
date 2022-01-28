@@ -47,16 +47,13 @@ export default class Runninglog extends React.Component {
   render() {
     const listRuns = this.state.runninglogs.map(runninglog => {
       return <div className='event-card' key={runninglog.runninglogID}>
-                <div className='running-log'>
+                <div className='delete-run'>
                   <i onClick={() => this.handleDeleterun(runninglog.runninglogID)} className="far fa-trash-alt"></i>
-                    <div className='event-text'>
-                      <p>Date: </p>
-                      {runninglog.date.split('T')[0]}
-                      <p>Duration: </p>
-                      {runninglog.duration}
-                      <p>Distance: </p>
-                      {runninglog.distance}
-                    </div>
+                </div>
+                <div className='event-text'>
+                  <h2>Date:  {runninglog.date.split('T')[0]}</h2>
+                  <h2>Duration: {runninglog.duration} </h2>
+                  <h2>Distance:  {runninglog.distance}</h2>
                 </div>
             </div>;
     });
