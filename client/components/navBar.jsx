@@ -23,6 +23,7 @@ export default class NavBar extends React.Component {
 
   render() {
     const hidden = this.handleMenuclose();
+    console.log('state:', this.state);
     return (
       <div className='row'>
         <div onClick={this.handleMenuOpen}className='icon'>

@@ -36,9 +36,9 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
+      <div className='sign-in'>
+        <form className='account-form'onSubmit={this.handleSubmit}>
+          <div className= 'form-inputs'>
             <label>Username</label>
               <input
               name ="username"
@@ -57,7 +57,7 @@ export default class SignUp extends React.Component {
               onChange ={this.handlepassword} />
           </div>
           <div>
-            <button>Sign up</button>
+            <button>Sign Up</button>
           </div>
         </form>
       </div>
