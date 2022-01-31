@@ -6,8 +6,8 @@ import { parseRoute } from './lib';
 import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
-import RunForm from './components/run-form';
 import Runninglog from './pages/runninglog';
+import SignUp from './pages/sign-up';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -46,6 +46,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'runs') {
       return <Runninglog/>;
+    }
+    if (route.path === 'signup') {
+      return <SignUp/>;
     }
     return <NotFound />;
   }

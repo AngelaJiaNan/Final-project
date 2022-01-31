@@ -167,7 +167,7 @@ export default class EditEvent extends React.Component {
             </div>
             <div className='event-btn'>
               <button className='delete-btn'>Cancel</button>
-              <button className='edit-btn' type="submit">Edit Event</button>
+              <button className='edit-btn' type="submit">Create Event</button>
             </div>
           </form>
         </div>

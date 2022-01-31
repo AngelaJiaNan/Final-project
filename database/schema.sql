@@ -8,8 +8,9 @@ create schema "public";
 
 CREATE TABLE "users" (
 	"userID" serial NOT NULL,
-	"email" TEXT NOT NULL UNIQUE,
+	"username" TEXT NOT NULL UNIQUE,
 	"password" TEXT NOT NULL,
+  "createdAt" time with time zone NOT NULL default now(),
 	CONSTRAINT "users_pk" PRIMARY KEY ("userID")
 ) WITH (
   OIDS=FALSE

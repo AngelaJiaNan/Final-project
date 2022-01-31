@@ -19,7 +19,7 @@ export default class Delete extends React.Component {
       if (!response.error) {
         this.props.modalClose();
       }
-    }).then(() => { location.hash = '#'; });
+    }).then(() => { location.hash = ''; });
   }
 
   render() {

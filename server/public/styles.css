@@ -1,3 +1,50 @@
+.hidden {
+  display: none;
+}
+
+.menu-content {
+  line-height: 3rem;
+  background-color: white;
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+.container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  margin: auto;
+  width: 50%;
+  padding: 2px;
+  text-align: center;
+}
+
+.icon {
+  font-size: 2.5rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.row {
+  display: flex;
+  background-color: #343a34;
+  color: white;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-left: 5px;
+  width: 30%;
+  height: 100%;
+}
+
 a {
   text-decoration: none;
 }
@@ -45,45 +92,6 @@ button[type="submit"]:hover {
   text-align: center;
 }
 
-.row {
-  display: flex;
-  background-color: #343a40;
-  border: 2px solid;
-  padding: 10px;
-  margin: -1px;
-  font-size: 20px;
-  padding-left: 25px;
-  padding-top: 26px;
-}
-
-#running-man {
-  color: white;
-  padding-left: 7px;
-  font-size: 29px;
-  padding-top: 12px;
-}
-
-.col-logo {
-  width: 50%;
-  font-size: 32px;
-}
-
-.col-navitem {
-  width: 50%;
-  padding-top: 20px;
-  display: flex;
-  justify-content: space-evenly;
-  padding-left: 25px;
-}
-
-.nav-items {
-  color: #007bff;
-}
-
-.nav-logo {
-  color: white;
-}
-
 label {
   font-size: 18px;
 }
@@ -114,7 +122,7 @@ h3 {
 
 .event-text {
   text-align: center;
-  padding: 4.375rem;
+  padding: 2rem;
 }
 
 .backbtn {
@@ -135,7 +143,7 @@ h3 {
   width: 60%;
   margin-top: 2rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
-  height: 81vh;
+  height: 100%;
 }
 
 .event-infor {
@@ -159,7 +167,8 @@ h3 {
 .event-btn {
   display: flex;
   justify-content: space-evenly;
-  gap: 14rem;
+  gap: 12rem;
+  padding: 2rem;
 }
 
 .delete-btn {
@@ -191,7 +200,7 @@ h3 {
   background-color: white;
   width: 40%;
   height: 35%;
-  border-radius: 1.5 rem;
+  border-radius: 1rem;
   padding: 3rem;
   text-align: center;
   margin: 5% auto 15%;
@@ -201,6 +210,7 @@ h3 {
   display: flex;
   padding: 10px;
   margin-left: 30px;
+  gap: 0.5rem;
 }
 
 #new {
@@ -212,7 +222,43 @@ h3 {
 .form-modal {
   background-color: white;
   width: 60%;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   margin: 5% auto 15%;
+  border-radius: 2rem;
+  height: 63%;
+}
+
+.sign-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+
+.account-form {
+  border: solid black;
+  border-radius: 6px;
+  width: 40%;
+  padding: 2rem;
+  height: 60%;
+}
+
+.run-container {
+  margin: auto;
+  width: 80%;
+}
+
+.account-header {
+  padding-bottom: 2rem;
+}
+
+.delete-run {
+  color: red;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
 }
