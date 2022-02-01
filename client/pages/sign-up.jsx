@@ -39,7 +39,7 @@ export default class SignUp extends React.Component {
       <div className='sign-in'>
         <form className='account-form'onSubmit={this.handleSubmit}>
           <div className='account-header'>
-            <h2>Create Account</h2>
+            <h2>Create Account : Welcome back</h2>
           </div>
           <div className= 'form-inputs'>
             <label>Username</label>
