@@ -19,8 +19,6 @@ app.use(jsonMiddleWare);
 
 app.use(staticMiddleware);
 
-app.use(errorMiddleware);
-
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -43,6 +41,39 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         })
         .catch(err => next(err));
     });
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+  Select "userID",
+  "hashedPassword"
+  from "users"
+  where "username" = $1`;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userID, hashedpassword } = user;
+      console.log('password:', hashedpassword);
+      argon2.verify(hashedpassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userID, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ payload, token });
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
 });
 
 app.post('/api/events', (req, res, next) => {
@@ -197,6 +228,8 @@ app.delete('/api/runninglogs/:runninglogID', (req, res, next) => {
       res.status(500).json({ Error: 'An unexpected error occured' });
     });
 });
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
