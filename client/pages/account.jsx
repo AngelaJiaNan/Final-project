@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default class SignUp extends React.Component {
+export default class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
       username: '',
-      password: ''
+      password: '',
+      signIn: this.props.signIn
     });
     this.handleusername = this.handleusername.bind(this);
     this.handlepassword = this.handlepassword.bind(this);
@@ -20,9 +21,10 @@ export default class SignUp extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     event.preventDefault();
-    fetch('/api/auth/sign-up', {
+    const { action } = this.props;
+    fetch(`/api/auth/${action}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,8 +32,20 @@ export default class SignUp extends React.Component {
       body: JSON.stringify(this.state)
     })
       .then(response => response.json())
-      .then(result => { location.hash = '#signup'; })
+      .then(result => {
+        if (action === 'sign-up') {
+          window.location.hash = 'login';
+        } else if (action === 'sign-in') {
+          window.localStorage.setItem('token', result.token);
+          window.location.hash = '#';
+        }
+      })
       .catch(err => console.error(err));
+
+    this.setState({
+      username: '',
+      password: ''
+    });
   }
 
   render() {
@@ -39,7 +53,7 @@ export default class SignUp extends React.Component {
       <div className='sign-in'>
         <form className='account-form'onSubmit={this.handleSubmit}>
           <div className='account-header'>
-            <h2>Create Account : Welcome back</h2>
+            <h2>{this.state.signIn ? 'Welcome Back' : 'Create Account'}</h2>
           </div>
           <div className= 'form-inputs'>
             <label>Username</label>
@@ -60,7 +74,14 @@ export default class SignUp extends React.Component {
               onChange ={this.handlepassword} />
           </div>
           <div className='event-btn'>
-            <button type='submit'>Sign Up</button>
+            <button type='submit'>Sign In</button>
+            <button> Demo User</button>
+          </div>
+          <div>
+            <p>
+              Don&apos;t have an account yet?
+            </p>
+            <a href="sign-up"> Create a account</a>
           </div>
         </form>
       </div>

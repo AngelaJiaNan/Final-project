@@ -7,7 +7,7 @@ import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import Runninglog from './pages/runninglog';
-import SignUp from './pages/sign-up';
+import Account from './pages/account';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,7 +48,10 @@ export default class App extends React.Component {
       return <Runninglog/>;
     }
     if (route.path === 'signup') {
-      return <SignUp/>;
+      return <Account action="signup" signIn={false}/>;
+    }
+    if (route.path === 'signin') {
+      return <Account action="signin" signIn={true}/>;
     }
     return <NotFound />;
   }
