@@ -47,23 +47,26 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
+  console.log('BODY:', req.body);
   if (!username || !password) {
     throw new ClientError(401, 'invalid login');
   }
   const sql = `
   Select "userID",
-  "hashedPassword"
+  "password"
   from "users"
   where "username" = $1`;
   const params = [username];
   db.query(sql, params)
     .then(result => {
+      // console.log('RESULT:', result);
       const [user] = result.rows;
       if (!user) {
         throw new ClientError(401, 'invalid login');
       }
-      const hashedPassword = result.row.password;
-      const userID = result.rows[0].userID;
+      console.log(user);
+      const hashedPassword = user.password;
+      const userID = user.userID;
       console.log('password:', hashedPassword);
       argon2.verify(hashedPassword, password)
         .then(isMatching => {
