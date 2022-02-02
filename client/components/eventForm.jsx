@@ -49,6 +49,7 @@ export default class EventForm extends React.Component {
   }
 
   handleSubmit(event) {
+    const token = window.localStorage.getItem('token');
     event.preventDefault();
     const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)
@@ -57,7 +58,8 @@ export default class EventForm extends React.Component {
         fetch('/api/events', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-Access-Token': token
           },
           body: JSON.stringify({ ...this.state, ...geoLatlon })
         });

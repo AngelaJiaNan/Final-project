@@ -10,7 +10,12 @@ export default class EventContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/events')
+    const token = window.localStorage.getItem('token');
+    fetch('/api/events', {
+      headers: {
+        'X-Access-Token': token
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.setState({ events: data });

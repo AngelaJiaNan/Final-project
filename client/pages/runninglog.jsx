@@ -12,7 +12,12 @@ export default class Runninglog extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/runninglogs')
+    const token = window.localStorage.getItem('token');
+    fetch('/api/runninglogs', {
+      headers: {
+        'X-Access-Token': token
+      }
+    })
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -28,11 +33,13 @@ export default class Runninglog extends React.Component {
   }
 
   handleDeleterun(runninglogID) {
+    const token = window.localStorage.getItem('token');
     event.preventDefault();
     fetch(`/api/runninglogs/${runninglogID}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
       }
     }).then(response => {
       if (!response.error) {

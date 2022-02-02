@@ -34,11 +34,14 @@ export default class RunForm extends React.Component {
   }
 
   handleSubmit(event) {
+    const token = window.localStorage.getItem('token');
+    console.log('TOKEN:', token);
     event.preventDefault();
     fetch('/api/runninglogs', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
       },
       body: JSON.stringify(this.state)
     })

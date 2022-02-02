@@ -24,7 +24,12 @@ export default class EditEvent extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/events/${this.props.eventID}`)
+    const token = window.localStorage.getItem('token');
+    fetch(`/api/events/${this.props.eventID}`, {
+      headers: {
+        'X-Access-Token': token
+      }
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({ event: data });
