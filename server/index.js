@@ -28,7 +28,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
   }
   const sql = `
       insert into "users"
-      ("username", "password")
+      ("username", "hashedPassword")
       values ($1, $2)
       returning *
       `;
@@ -53,37 +53,32 @@ app.post('/api/auth/sign-in', (req, res, next) => {
   }
   const sql = `
   Select "userID",
-  "password"
+  "hashedPassword"
   from "users"
   where "username" = $1`;
   const params = [username];
   db.query(sql, params)
     .then(result => {
-      // console.log('RESULT:', result);
       const [user] = result.rows;
       if (!user) {
         throw new ClientError(401, 'invalid login');
       }
-      console.log(user);
-      const hashedPassword = user.password;
-      const userID = user.userID;
+      const { userID, hashedPassword } = user;
       console.log('password:', hashedPassword);
-      argon2.verify(hashedPassword, password)
+      return argon2
+        .verify(hashedPassword, password)
         .then(isMatching => {
+          console.log('isMatching: ', isMatching);
           if (!isMatching) {
             throw new ClientError(401, 'invalid login');
           }
-          const payload = {
-            users: {
-              userID: userID,
-              username: username
-            }
-          };
+          const payload = { userID, username };
+          console.log('process.env.TOKEN_SECRET: ', process.env.TOKEN_SECRET);
+          console.log('PAYLOAD: ', payload);
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          payload.token = token;
-          res.status(201).json(payload);
-        })
-        .catch(err => next(err));
+          console.log('token: ', token);
+          res.json({ token, user: payload });
+        });
     })
     .catch(err => next(err));
 });

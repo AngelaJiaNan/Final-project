@@ -1,3 +1,3 @@
 insert into "users"
-  ("username", "password")
+  ("username", "hashedPassword")
   values ('demoUser', 'temp');
