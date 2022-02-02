@@ -47,11 +47,10 @@ export default class App extends React.Component {
     if (route.path === 'runs') {
       return <Runninglog/>;
     }
-    if (route.path === 'signup') {
-      return <Account action="signup" signIn={false}/>;
-    }
-    if (route.path === 'signin') {
-      return <Account action="signin" signIn={true}/>;
+    if (route.path === 'login' || route.path === '') {
+      return <Account action="sign-in" />;
+    } else if (route.path === 'sign-up') {
+      return <Account action='sign-up'/>;
     }
     return <NotFound />;
   }

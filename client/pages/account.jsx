@@ -3,10 +3,10 @@ import React from 'react';
 export default class Account extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', props);
     this.state = ({
       username: '',
-      password: '',
-      signIn: this.props.signIn
+      password: ''
     });
     this.handleusername = this.handleusername.bind(this);
     this.handlepassword = this.handlepassword.bind(this);
@@ -34,7 +34,7 @@ export default class Account extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (action === 'sign-up') {
-          window.location.hash = 'login';
+          window.location.hash = 'account';
         } else if (action === 'sign-in') {
           window.localStorage.setItem('token', result.token);
           window.location.hash = '#';
@@ -49,11 +49,12 @@ export default class Account extends React.Component {
   }
 
   render() {
+    const { action } = this.props;
     return (
       <div className='sign-in'>
         <form className='account-form'onSubmit={this.handleSubmit}>
           <div className='account-header'>
-            <h2>{this.state.signIn ? 'Welcome Back' : 'Create Account'}</h2>
+            <h2>{action === 'sign-in' ? 'Welcome Back' : 'Create Account'}</h2>
           </div>
           <div className= 'form-inputs'>
             <label>Username</label>
@@ -73,16 +74,18 @@ export default class Account extends React.Component {
               value={this.state.password}
               onChange ={this.handlepassword} />
           </div>
-          <div className='event-btn'>
-            <button type='submit'>Sign In</button>
-            <button> Demo User</button>
-          </div>
-          <div>
-            <p>
-              Don&apos;t have an account yet?
-            </p>
-            <a href="sign-up"> Create a account</a>
-          </div>
+          <div className='btn-container'>
+            <button className='account-btn' type='submit'>
+              <a href="sign-up"></a>{action === 'sign-up' ? 'Sign up' : 'Login'}
+            </button>
+            <button id='demo-login' onClick={this.handleGuestLogin}>Demo</button>
+            </div>
+            <div className='account-text'><span>
+              {action === 'sign-up' ? 'Already a member?' : 'Need an account?'}
+            </span>
+              <a href={action === 'sign-in' ? '#sign-up' : '#login'} id='login'>
+                {action === 'sign-in' ? 'Sign up' : 'Login'}</a>
+            </div>
         </form>
       </div>
     );

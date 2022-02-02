@@ -37,7 +37,7 @@ export default class NavBar extends React.Component {
             <a onClick={this.handleMenuContent} href='#'>Home</a>
             <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
-            <a onClick={this.handleMenuContent} href='#signup'>Sign In</a>
+            <a onClick={this.handleMenuContent} href='#sign-up'>Create Account</a>
           </nav>
         </div>
       </div>
