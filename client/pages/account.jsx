@@ -37,7 +37,7 @@ export default class Account extends React.Component {
           window.location.hash = '#';
         } else if (action === 'sign-in') {
           window.localStorage.setItem('token', result.token);
-          window.location.hash = '#runs';
+          window.location.hash = '#';
         }
       })
       .catch(err => console.error(err));
