@@ -33,6 +33,16 @@ export default class NavBar extends React.Component {
         <div className='header'>
           <h1>Run With Me</h1>
         </div>
+        <div>
+          {
+          user !== null &&
+            <a href='#login'><button onClick={handleSignOut}>Sign out</button></a>
+          }
+          {
+          user === null &&
+            <a href='#login'><button onClik= {handleSignOut}>Sign Out</button></a>
+          }
+        </div>
         <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
           <nav className="menu-content">
             <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
@@ -45,3 +55,4 @@ export default class NavBar extends React.Component {
     );
   }
 }
+NavBar.contextType = AppContext;
