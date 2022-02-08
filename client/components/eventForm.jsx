@@ -49,7 +49,7 @@ export default class EventForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('user-jwt');
     event.preventDefault();
     const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)

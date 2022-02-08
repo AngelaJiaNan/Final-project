@@ -25,6 +25,7 @@ export default class NavBar extends React.Component {
   render() {
     const hidden = this.handleMenuclose();
     const { user, handleSignOut } = this.context;
+    // console.log('USER:', user);
     return (
       <div className='row'>
         <div onClick={this.handleMenuOpen}className='icon'>
@@ -33,21 +34,21 @@ export default class NavBar extends React.Component {
         <div className='header'>
           <h1>Run With Me</h1>
         </div>
-        <div>
-          {
-          user !== null &&
-            <a href='#login'><button onClick={handleSignOut}>Sign out</button></a>
-          }
-          {
-          user === null &&
-            <a href='#login'><button>Sign In</button></a>
-          }
-        </div>
         <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
           <nav className="menu-content">
             <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
             <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
+            <div>
+              {
+                user !== null &&
+                <a href='#login' onClick={handleSignOut}>Sign out</a>
+              }
+              {
+                user === null &&
+                <a href='#login'>Sign In</a>
+              }
+            </div>
           </nav>
         </div>
       </div>

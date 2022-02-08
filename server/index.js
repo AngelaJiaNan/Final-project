@@ -86,7 +86,7 @@ app.use(authorizationMiddleware);
 
 app.post('/api/events', (req, res, next) => {
   const body = req.body;
-  const userID = req.user.userID;
+  const { userID } = req.user;
   const sql = `
   insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
   values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -95,7 +95,7 @@ app.post('/api/events', (req, res, next) => {
   const params = [body.title, body.date, body.address, body.city, body.state, body.lat, body.lng, body.startingtime, userID];
   db.query(sql, params)
     .then(result => {
-      const event = result.rows[0];
+      const event = result.rows;
       res.status(201).json(event);
     })
     .catch(error => {
@@ -125,7 +125,7 @@ app.get('/api/events/:eventID', (req, res, next) => {
 
 app.patch('/api/events/:eventID', (req, res, next) => {
   const eventID = parseInt(req.params.eventID);
-  console.log('eventID:', eventID);
+
   const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
   if (!Number.isInteger(eventID) || eventID <= 0) {
     res.status(400).json({ Error: 'invalid id' });
@@ -205,11 +205,14 @@ app.post('/api/runninglogs', (req, res, next) => {
 });
 
 app.get('/api/runninglogs', (req, res, next) => {
+  const { userID } = req.user;
   const sql = `
   select *
   from "runninglogs"
+  where "userID" = $1
   `;
-  db.query(sql)
+  const params = [userID];
+  db.query(sql, params)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
 });

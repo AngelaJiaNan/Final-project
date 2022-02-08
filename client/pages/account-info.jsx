@@ -48,28 +48,6 @@ export default class AccountInfo extends React.Component {
     });
   }
 
-  // handleDemoSubmit(event) {
-  //   event.preventDefault();
-  //   const guestSignIn = {
-  //     username: 'demoUser',
-  //     password: 'temp'
-  //   };
-  //   const req = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(guestSignIn)
-  //   };
-  //   fetch('/api/auth/sign-in', req)
-  //     .then(res => res.json())
-  //     .then(result => {
-  //       window.localStorage.setItem('token', result.token);
-  //       window.location.hash = 'home-page';
-  //     })
-  //     .catch(err => console.error(err));
-  // }
-
   render() {
     const { action } = this.props;
     return (
@@ -100,7 +78,7 @@ export default class AccountInfo extends React.Component {
             <button className='account-btn' type='submit'>
               <a href="sign-up"></a>{action === 'sign-up' ? 'Sign up' : 'Login'}
             </button>
-            <button id='demo-login' onClick={this.handleGuestLogin}>Demo</button>
+            <button id='demo-login'>Demo</button>
             </div>
             <div className='account-text'><span>
               {action === 'sign-up' ? 'Already a member?' : 'Need an account?'}
