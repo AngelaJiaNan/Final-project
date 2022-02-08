@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './pages/home';
+import Listevents from './pages/listevents';
 import EventForm from './components/eventForm';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
@@ -30,8 +30,8 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === '') {
-      return <Home/>;
+    if (route.path === 'eventpage') {
+      return <Listevents/>;
     }
     if (route.path === 'create') {
       return <EventForm/>;

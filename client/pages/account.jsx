@@ -37,7 +37,7 @@ export default class Account extends React.Component {
           window.location.hash = '#';
         } else if (action === 'sign-in') {
           window.localStorage.setItem('token', result.token);
-          window.location.hash = '#';
+          window.location.hash = 'eventpage';
         }
       })
       .catch(err => console.error(err));
@@ -46,6 +46,28 @@ export default class Account extends React.Component {
       username: '',
       password: ''
     });
+  }
+
+  handleDemoSubmit(event) {
+    event.preventDefault();
+    const guestSignIn = {
+      username: 'demoUser',
+      password: 'temp'
+    };
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(guestSignIn)
+    };
+    fetch('/api/auth/sign-in', req)
+      .then(res => res.json())
+      .then(result => {
+        window.localStorage.setItem('token', result.token);
+        window.location.hash = 'home-page';
+      })
+      .catch(err => console.error(err));
   }
 
   render() {

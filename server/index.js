@@ -47,7 +47,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
-  console.log('BODY:', req.body);
   if (!username || !password) {
     throw new ClientError(401, 'invalid login');
   }
@@ -64,19 +63,19 @@ app.post('/api/auth/sign-in', (req, res, next) => {
         throw new ClientError(401, 'invalid login');
       }
       const { userID, hashedPassword } = user;
-      console.log('password:', hashedPassword);
+      // console.log('password:', hashedPassword);
       return argon2
         .verify(hashedPassword, password)
         .then(isMatching => {
-          console.log('isMatching: ', isMatching);
+          // console.log('isMatching: ', isMatching);
           if (!isMatching) {
             throw new ClientError(401, 'invalid login');
           }
           const payload = { userID, username };
-          console.log('process.env.TOKEN_SECRET: ', process.env.TOKEN_SECRET);
-          console.log('PAYLOAD: ', payload);
+          // console.log('process.env.TOKEN_SECRET: ', process.env.TOKEN_SECRET);
+          // console.log('PAYLOAD: ', payload);
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          console.log('token: ', token);
+          // console.log('token: ', token);
           res.json({ token, user: payload });
         });
     })
@@ -87,7 +86,7 @@ app.use(authorizationMiddleware);
 
 app.post('/api/events', (req, res, next) => {
   const body = req.body;
-  const userID = 1;
+  const userID = req.user.userID;
   const sql = `
   insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
   values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -187,7 +186,7 @@ app.delete('/api/events/:eventID', (req, res, next) => {
 
 app.post('/api/runninglogs', (req, res, next) => {
   const { date, distance, duration } = req.body;
-  const userID = 1;
+  const userID = req.user.userID;
   const sql = `
   insert into "runninglogs" ("date","distance", "duration", "userID")
   values ($1, $2, $3, $4)

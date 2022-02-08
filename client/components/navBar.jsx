@@ -23,7 +23,6 @@ export default class NavBar extends React.Component {
 
   render() {
     const hidden = this.handleMenuclose();
-    console.log('state:', this.state);
     return (
       <div className='row'>
         <div onClick={this.handleMenuOpen}className='icon'>
@@ -34,10 +33,10 @@ export default class NavBar extends React.Component {
         </div>
         <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
           <nav className="menu-content">
-            <a onClick={this.handleMenuContent} href='#'>Home</a>
+            <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
             <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
-            <a onClick={this.handleMenuContent} href='#sign-up'>Create Account</a>
+            {/* <a onClick={this.handleMenuContent} href='#sign-up'>Create Account</a> */}
           </nav>
         </div>
       </div>
