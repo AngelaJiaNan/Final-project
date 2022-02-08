@@ -7,25 +7,41 @@ import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import Runninglog from './pages/runninglog';
-import Account from './pages/account';
+import Accountinfo from './pages/account-info';
+import decodeToken from './lib/decode-token';
+import Auth from './pages/auth';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-    /**
-     * Listen for hash change events on the window object
-     * Each time the window.location.hash changes, parse
-     * it with the parseRoute() function and update state
-     */
+    const token = window.localStorage.getItem('user-jwt');
+    const user = token ? decodeToken(token) : null;
+    this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('user-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('user-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
@@ -48,19 +64,30 @@ export default class App extends React.Component {
       return <Runninglog/>;
     }
     if (route.path === 'login' || route.path === '') {
-      return <Account action="sign-in" />;
+      return <Accountinfo action="sign-in" />;
     } else if (route.path === 'sign-up') {
-      return <Account action='sign-up'/>;
+      return <Accountinfo action='sign-up'/>;
+    }
+    if (route.path === 'account') {
+      return (
+        <Auth signOut={this.handleSignOut} user={this.state.user} />
+      );
     }
     return <NotFound />;
   }
 
   render() {
+    if (this.state.isAuthorizing) return null;
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
-      <>
-      <NavBar/>
-      { this.renderPage()}
+      <AppContext.Provider value={contextValue}>
+        <>
+        <NavBar />
+        {this.renderPage()}
       </>
+      </AppContext.Provider>
     );
   }
 }

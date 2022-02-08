@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default class Account extends React.Component {
+export default class AccountInfo extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
     this.state = ({
       username: '',
       password: ''

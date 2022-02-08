@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class NavBar extends React.Component {
 
   render() {
     const hidden = this.handleMenuclose();
+    const { user, handleSignOut } = this.context;
     return (
       <div className='row'>
         <div onClick={this.handleMenuOpen}className='icon'>
