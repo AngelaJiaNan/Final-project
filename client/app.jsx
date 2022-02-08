@@ -35,12 +35,13 @@ export default class App extends React.Component {
 
   handleSignIn(result) {
     const { user, token } = result;
+    console.log('RESULT:', result);
     window.localStorage.setItem('user-jwt', token);
     this.setState({ user });
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('user-jwt');
+    window.localStorage.removeItem('');
     this.setState({ user: null });
   }
 
@@ -64,13 +65,13 @@ export default class App extends React.Component {
       return <Runninglog/>;
     }
     if (route.path === 'login' || route.path === '') {
-      return <Accountinfo action="sign-in" />;
+      return <Accountinfo action='sign-in' handleSignIn={this.handleSignIn}/>;
     } else if (route.path === 'sign-up') {
       return <Accountinfo action='sign-up'/>;
     }
-    if (route.path === 'account') {
+    if (route.path === 'auth') {
       return (
-        <Auth signOut={this.handleSignOut} user={this.state.user} />
+        <Auth handleSignOut={this.handleSignOut} user={this.state.user} />
       );
     }
     return <NotFound />;
@@ -84,7 +85,7 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={contextValue}>
         <>
-        <NavBar />
+        <NavBar signOut={this.handleSignOut} user={this.state.user} isAuthorizing={this.state.isAuthorizing}/>
         {this.renderPage()}
       </>
       </AppContext.Provider>

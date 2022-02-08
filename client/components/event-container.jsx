@@ -24,7 +24,7 @@ export default class EventContainer extends React.Component {
 
   render() {
     const events = this.state.events;
-    const allEvents = events.map(event => (
+    const allEvents = events && events.map(event => (
       <EventCard event={event} key={event.eventID}/>
     ));
     return (

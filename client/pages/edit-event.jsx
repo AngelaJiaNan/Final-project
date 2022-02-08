@@ -24,7 +24,7 @@ export default class EditEvent extends React.Component {
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('user-jwt');
     fetch(`/api/events/${this.props.eventID}`, {
       headers: {
         'X-Access-Token': token
@@ -107,7 +107,7 @@ export default class EditEvent extends React.Component {
       }
       )
       .then(() => {
-        location.hash = '#';
+        location.hash = '#eventpage';
       })
       .catch(err => {
         alert('There is a error ' + err);

@@ -2,7 +2,7 @@ import React from 'react';
 class Auth extends React.Component {
   constructor(props) {
     super(props);
-    this.setState = {
+    this.state = {
       user: null
     };
     this.handleClick = this.handleClick.bind(this);

@@ -33,10 +33,11 @@ export default class AccountInfo extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (action === 'sign-up') {
-          window.location.hash = '#';
+          window.location.hash = 'login';
         } else if (action === 'sign-in') {
           window.localStorage.setItem('token', result.token);
           window.location.hash = 'eventpage';
+          this.props.handleSignIn(result);
         }
       })
       .catch(err => console.error(err));
@@ -47,27 +48,27 @@ export default class AccountInfo extends React.Component {
     });
   }
 
-  handleDemoSubmit(event) {
-    event.preventDefault();
-    const guestSignIn = {
-      username: 'demoUser',
-      password: 'temp'
-    };
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(guestSignIn)
-    };
-    fetch('/api/auth/sign-in', req)
-      .then(res => res.json())
-      .then(result => {
-        window.localStorage.setItem('token', result.token);
-        window.location.hash = 'home-page';
-      })
-      .catch(err => console.error(err));
-  }
+  // handleDemoSubmit(event) {
+  //   event.preventDefault();
+  //   const guestSignIn = {
+  //     username: 'demoUser',
+  //     password: 'temp'
+  //   };
+  //   const req = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(guestSignIn)
+  //   };
+  //   fetch('/api/auth/sign-in', req)
+  //     .then(res => res.json())
+  //     .then(result => {
+  //       window.localStorage.setItem('token', result.token);
+  //       window.location.hash = 'home-page';
+  //     })
+  //     .catch(err => console.error(err));
+  // }
 
   render() {
     const { action } = this.props;

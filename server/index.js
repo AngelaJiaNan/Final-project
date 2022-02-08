@@ -125,6 +125,7 @@ app.get('/api/events/:eventID', (req, res, next) => {
 
 app.patch('/api/events/:eventID', (req, res, next) => {
   const eventID = parseInt(req.params.eventID);
+  console.log('eventID:', eventID);
   const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
   if (!Number.isInteger(eventID) || eventID <= 0) {
     res.status(400).json({ Error: 'invalid id' });

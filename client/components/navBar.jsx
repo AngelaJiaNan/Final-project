@@ -40,7 +40,7 @@ export default class NavBar extends React.Component {
           }
           {
           user === null &&
-            <a href='#login'><button onClik= {handleSignOut}>Sign Out</button></a>
+            <a href='#login'><button>Sign In</button></a>
           }
         </div>
         <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
@@ -48,7 +48,6 @@ export default class NavBar extends React.Component {
             <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
             <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
-            {/* <a onClick={this.handleMenuContent} href='#sign-up'>Create Account</a> */}
           </nav>
         </div>
       </div>
