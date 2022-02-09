@@ -35,11 +35,9 @@ export default class AccountInfo extends React.Component {
       .then(result => {
         if (action === 'sign-up') {
           window.location.hash = 'login';
-        } else if (action === 'sign-in') {
-          console.log('RESULT:', result.token);
-          window.localStorage.setItem('token', result.token);
-          window.location.hash = 'eventpage';
+        } else if (result.user && result.token) {
           this.props.handleSignIn(result);
+          window.location.hash = 'eventpage';
         }
       })
       .catch(err => console.error(err));

@@ -7,6 +7,7 @@ const ClientError = require('./client-error');
 const argon2 = require('argon2');
 const authorizationMiddleware = require('./authorization-middleware');
 const jwt = require('jsonwebtoken');
+const app = express();
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,7 +17,6 @@ const db = new pg.Pool({
 });
 
 const jsonMiddleWare = express.json();
-const app = express();
 
 app.use(jsonMiddleWare);
 
@@ -39,8 +39,8 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const params = [username, hashedpassword];
       db.query(sql, params)
         .then(result => {
-          const [newUser] = result.rows;
-          res.status(201).json(newUser);
+          const [user] = result.rows;
+          res.status(201).json(user);
         })
         .catch(err => next(err));
     });
