@@ -14,6 +14,7 @@ const db = new pg.Pool({
     rejectUnauthorized: false
   }
 });
+
 const jsonMiddleWare = express.json();
 const app = express();
 
