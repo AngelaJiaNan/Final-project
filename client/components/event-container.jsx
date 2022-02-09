@@ -10,7 +10,7 @@ export default class EventContainer extends React.Component {
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('user-jwt');
     fetch('/api/events', {
       headers: {
         'X-Access-Token': token

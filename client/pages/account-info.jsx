@@ -10,6 +10,7 @@ export default class AccountInfo extends React.Component {
     this.handleusername = this.handleusername.bind(this);
     this.handlepassword = this.handlepassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoUser = this.handleDemoUser.bind(this);
   }
 
   handleusername(event) {
@@ -35,6 +36,7 @@ export default class AccountInfo extends React.Component {
         if (action === 'sign-up') {
           window.location.hash = 'login';
         } else if (action === 'sign-in') {
+          console.log('RESULT:', result.token);
           window.localStorage.setItem('token', result.token);
           window.location.hash = 'eventpage';
           this.props.handleSignIn(result);
@@ -48,8 +50,36 @@ export default class AccountInfo extends React.Component {
     });
   }
 
+  handleDemoUser(event) {
+    event.preventDefault();
+    const demoUser = {
+      username: 'admin',
+      password: 'admin1'
+    };
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(demoUser)
+    };
+    fetch('/api/auth/sign-in', req)
+      .then(res => res.json())
+      .then(result => {
+        const token = result.token;
+        if (token) {
+          window.location.hash = 'eventpage';
+          this.props.handleSignIn(result);
+        } else {
+          window.location.hash = 'login';
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const { action } = this.props;
+
     return (
       <div className='sign-in'>
         <form className='account-form'onSubmit={this.handleSubmit}>
@@ -78,7 +108,7 @@ export default class AccountInfo extends React.Component {
             <button className='account-btn' type='submit'>
               <a href="sign-up"></a>{action === 'sign-up' ? 'Sign up' : 'Login'}
             </button>
-            <button id='demo-login'>Demo</button>
+            <button id='demo-login' onClick={this.handleDemoUser}>Demo</button>
             </div>
             <div className='account-text'><span>
               {action === 'sign-up' ? 'Already a member?' : 'Need an account?'}

@@ -38,7 +38,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const params = [username, hashedpassword];
       db.query(sql, params)
         .then(result => {
-          const [newUser] = result.rows;
+          const [newUser] = result.rows[0];
           res.status(201).json(newUser);
         })
         .catch(err => next(err));
@@ -86,7 +86,7 @@ app.use(authorizationMiddleware);
 
 app.post('/api/events', (req, res, next) => {
   const body = req.body;
-  const { userID } = req.user;
+  const { userID } = 1;
   const sql = `
   insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
   values ($1, $2, $3, $4, $5, $6, $7, $8, $9)

@@ -34,7 +34,7 @@ export default class RunForm extends React.Component {
   }
 
   handleSubmit(event) {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('user-jwt');
     console.log('TOKEN:', token);
     event.preventDefault();
     fetch('/api/runninglogs', {
