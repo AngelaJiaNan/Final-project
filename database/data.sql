@@ -1,3 +1,4 @@
 insert into "users"
-  ("username", "password")
-  values ('demoUser', 'temp');
+  ("userID", "username", "hashedPassword")
+  values (1,'admin', '$argon2i$v=19$m=4096,t=3,p=1$beEntYup8EABjlNdcLFa5g$VS5uuGvrt1LtcY4TfIgZkGG8jhtjYmvqiElcKxUkLUA');
+

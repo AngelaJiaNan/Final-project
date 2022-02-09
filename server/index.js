@@ -5,6 +5,8 @@ const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const ClientError = require('./client-error');
 const argon2 = require('argon2');
+const authorizationMiddleware = require('./authorization-middleware');
+const jwt = require('jsonwebtoken');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -19,8 +21,6 @@ app.use(jsonMiddleWare);
 
 app.use(staticMiddleware);
 
-app.use(errorMiddleware);
-
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -28,7 +28,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
   }
   const sql = `
       insert into "users"
-      ("username", "password")
+      ("username", "hashedPassword")
       values ($1, $2)
       returning *
       `;
@@ -45,9 +45,48 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     });
 });
 
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+  Select "userID",
+  "hashedPassword"
+  from "users"
+  where "username" = $1`;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userID, hashedPassword } = user;
+      // console.log('password:', hashedPassword);
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          // console.log('isMatching: ', isMatching);
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userID, username };
+          // console.log('process.env.TOKEN_SECRET: ', process.env.TOKEN_SECRET);
+          // console.log('PAYLOAD: ', payload);
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          // console.log('token: ', token);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
 app.post('/api/events', (req, res, next) => {
   const body = req.body;
-  const userID = 1;
+  const userID = req.user.userID;
   const sql = `
   insert into "events" ("title", "date","address", "city","state","lat", "lng", "startingtime", "userID")
   values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -56,7 +95,7 @@ app.post('/api/events', (req, res, next) => {
   const params = [body.title, body.date, body.address, body.city, body.state, body.lat, body.lng, body.startingtime, userID];
   db.query(sql, params)
     .then(result => {
-      const event = result.rows[0];
+      const event = result.rows;
       res.status(201).json(event);
     })
     .catch(error => {
@@ -86,6 +125,7 @@ app.get('/api/events/:eventID', (req, res, next) => {
 
 app.patch('/api/events/:eventID', (req, res, next) => {
   const eventID = parseInt(req.params.eventID);
+
   const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
   if (!Number.isInteger(eventID) || eventID <= 0) {
     res.status(400).json({ Error: 'invalid id' });
@@ -147,7 +187,7 @@ app.delete('/api/events/:eventID', (req, res, next) => {
 
 app.post('/api/runninglogs', (req, res, next) => {
   const { date, distance, duration } = req.body;
-  const userID = 1;
+  const userID = req.user.userID;
   const sql = `
   insert into "runninglogs" ("date","distance", "duration", "userID")
   values ($1, $2, $3, $4)
@@ -165,11 +205,14 @@ app.post('/api/runninglogs', (req, res, next) => {
 });
 
 app.get('/api/runninglogs', (req, res, next) => {
+  const { userID } = req.user;
   const sql = `
   select *
   from "runninglogs"
+  where "userID" = $1
   `;
-  db.query(sql)
+  const params = [userID];
+  db.query(sql, params)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
 });
@@ -197,6 +240,8 @@ app.delete('/api/runninglogs/:runninglogID', (req, res, next) => {
       res.status(500).json({ Error: 'An unexpected error occured' });
     });
 });
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console

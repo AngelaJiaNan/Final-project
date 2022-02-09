@@ -14,7 +14,13 @@ export default class EventDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/events/${this.props.eventID}`)
+    const token = window.localStorage.getItem('user-jwt');
+    fetch(`/api/events/${this.props.eventID}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
+      }
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({ event: data });

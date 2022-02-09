@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -23,7 +24,8 @@ export default class NavBar extends React.Component {
 
   render() {
     const hidden = this.handleMenuclose();
-    console.log('state:', this.state);
+    const { user, handleSignOut } = this.context;
+    // console.log('USER:', user);
     return (
       <div className='row'>
         <div onClick={this.handleMenuOpen}className='icon'>
@@ -34,13 +36,23 @@ export default class NavBar extends React.Component {
         </div>
         <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
           <nav className="menu-content">
-            <a onClick={this.handleMenuContent} href='#'>Home</a>
+            <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
             <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
-            <a onClick={this.handleMenuContent} href='#signup'>Sign In</a>
+            <div>
+              {
+                user !== null &&
+                <a href='#login' onClick={handleSignOut}>Sign out</a>
+              }
+              {
+                user === null &&
+                <a href='#login'>Sign In</a>
+              }
+            </div>
           </nav>
         </div>
       </div>
     );
   }
 }
+NavBar.contextType = AppContext;

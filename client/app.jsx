@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './pages/home';
+import Listevents from './pages/listevents';
 import EventForm from './components/eventForm';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
@@ -7,31 +7,48 @@ import NavBar from './components/navBar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import Runninglog from './pages/runninglog';
-import SignUp from './pages/sign-up';
+import Accountinfo from './pages/account-info';
+import decodeToken from './lib/decode-token';
+import Auth from './pages/auth';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-    /**
-     * Listen for hash change events on the window object
-     * Each time the window.location.hash changes, parse
-     * it with the parseRoute() function and update state
-     */
+    const token = window.localStorage.getItem('user-jwt');
+    const user = token ? decodeToken(token) : null;
+    this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    console.log('RESULT:', result);
+    window.localStorage.setItem('user-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('');
+    this.setState({ user: null });
   }
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === '') {
-      return <Home/>;
+    if (route.path === 'eventpage') {
+      return <Listevents/>;
     }
     if (route.path === 'create') {
       return <EventForm/>;
@@ -47,18 +64,31 @@ export default class App extends React.Component {
     if (route.path === 'runs') {
       return <Runninglog/>;
     }
-    if (route.path === 'signup') {
-      return <SignUp/>;
+    if (route.path === 'login' || route.path === '') {
+      return <Accountinfo action='sign-in' handleSignIn={this.handleSignIn}/>;
+    } else if (route.path === 'sign-up') {
+      return <Accountinfo action='sign-up'/>;
+    }
+    if (route.path === 'auth') {
+      return (
+        <Auth handleSignOut={this.handleSignOut} user={this.state.user} />
+      );
     }
     return <NotFound />;
   }
 
   render() {
+    if (this.state.isAuthorizing) return null;
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
-      <>
-      <NavBar/>
-      { this.renderPage()}
+      <AppContext.Provider value={contextValue}>
+        <>
+        <NavBar signOut={this.handleSignOut} user={this.state.user} isAuthorizing={this.state.isAuthorizing}/>
+        {this.renderPage()}
       </>
+      </AppContext.Provider>
     );
   }
 }
