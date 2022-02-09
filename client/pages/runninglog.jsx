@@ -12,7 +12,7 @@ export default class Runninglog extends React.Component {
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('user-jwt');
     fetch('/api/runninglogs', {
       headers: {
         'X-Access-Token': token
