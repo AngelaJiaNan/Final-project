@@ -53,7 +53,7 @@ export default class EventDetails extends React.Component {
       <div>
         {this.state.showModal && <Delete eventID={eventID} modalOpen={this.modalOpen} modalClose={this.modalClose} />}
       <div className='eventdetail-container'>
-          <a className='backbtn' href="#">
+          <a className='backbtn' href="#eventpage">
           &lt; Back to event
           </a>
         <div className='event-infor'>
