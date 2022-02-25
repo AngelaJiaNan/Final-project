@@ -7,3 +7,5 @@ A full stack JavaScript solo project.
 # Preview 
 
 # Features
+
+# Stretch features
