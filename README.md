@@ -8,4 +8,6 @@ A full stack JavaScript solo project.
 
 # Features
 
-# Stretch features
+# Stretch Features
+
+### Getting Started
