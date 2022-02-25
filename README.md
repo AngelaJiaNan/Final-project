@@ -5,3 +5,5 @@ A full stack JavaScript solo project.
 # Technologies Used
 
 # Preview 
+
+# Features
