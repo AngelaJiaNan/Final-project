@@ -18,6 +18,10 @@ A full stack JavaScript solo project.
 # Preview 
 
 # Features
+- User can create a account
+- User can create a event 
+- User can edit event 
+- User can delete event
 
 # Stretch Features
 
