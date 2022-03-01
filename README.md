@@ -21,4 +21,10 @@ A full stack JavaScript solo project.
 
 # Stretch Features
 
+### System Requirements
+
+- Node.js 10 or higher
+- NPM 6 or higher
+- Postgres
+
 ### Getting Started
