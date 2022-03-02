@@ -22,6 +22,7 @@ A full stack JavaScript solo project.
 - User can create a event 
 - User can edit event 
 - User can delete event
+- User can log runs
 
 # Stretch Features
 
