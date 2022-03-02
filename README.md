@@ -14,6 +14,7 @@ A full stack JavaScript solo project.
 - CSS3
 - Heroku
 - Google map API
+- Google geolocation API
 
 # Preview 
 
