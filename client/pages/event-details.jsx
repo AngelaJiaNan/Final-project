@@ -52,34 +52,34 @@ export default class EventDetails extends React.Component {
     return (
       <div>
         {this.state.showModal && <Delete eventID={eventID} modalOpen={this.modalOpen} modalClose={this.modalClose} />}
-      <div className='eventdetail-container'>
+        <div className='eventdetail-container'>
           <a className='backbtn' href="#eventpage">
-          &lt; Back to event
+            &lt; Back to event
           </a>
-        <div className='event-infor'>
-          <div className='event-title'>
-            <h2>{title}</h2>
-          </div>
-          <div className='event-content'>
-            <p>Date: {modDate}</p>
-            <p>Time: {startingtime}</p>
-            <p>Address: {modAddress}</p>
-            <p>{cityState}</p>
-          </div>
-          <div style={{ height: '40vh', width: '40%', padding: '10px', margin: 'auto' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
-            center={mapCoordinates}
-            defaultZoom={9}
-          >
-          </GoogleMapReact>
-          </div>
+          <div className='event-infor'>
+            <div className='event-title'>
+              <h2>{title}</h2>
+            </div>
+            <div className='event-content'>
+              <p>Date: {modDate}</p>
+              <p>Time: {startingtime}</p>
+              <p>Address: {modAddress}</p>
+              <p>{cityState}</p>
+            </div>
+            <div style={{ height: '40vh', width: '40%', padding: '10px', margin: 'auto' }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
+                center={mapCoordinates}
+                defaultZoom={9}
+              >
+              </GoogleMapReact>
+            </div>
           </div>
           <div className='event-btn'>
-          <button className='delete-btn' onClick={this.modalOpen}>Delete</button>
-          <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
+            <button className='delete-btn' onClick={this.modalOpen}>Delete</button>
+            <a className='edit-btn' href={`#edit?eventID=${eventID}`}>Edit Events</a>
+          </div>
         </div>
-      </div>
       </div>
     );
   }
