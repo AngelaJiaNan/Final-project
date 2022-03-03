@@ -1,6 +1,6 @@
 # Run with me
 
-A full stack JavaScript solo project.
+A web application for runners who wants to run with others and track their own running progress.
 
 ### Live Demo
 
@@ -26,12 +26,16 @@ Take a look for yourself and let me know your thoughts!
 # Features
 - User can create a account
 - User can create a event 
+- User can see location of the even though google map
 - User can edit event 
 - User can delete event
 - User can log runs
-- Usre can delete runs
+- User can delete runs
 
 # Stretch Features
+- User can get email updates about events
+- User can search event by location 
+- User can click attending to events
 
 # System Requirements
 
