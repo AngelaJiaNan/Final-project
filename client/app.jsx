@@ -1,9 +1,9 @@
 import React from 'react';
 import Listevents from './pages/listevents';
-import EventForm from './components/eventForm';
+import EventForm from './components/eventform';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
-import NavBar from './components/navBar';
+import NavBar from './components/navbar';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import Runninglog from './pages/runninglog';
@@ -35,7 +35,6 @@ export default class App extends React.Component {
 
   handleSignIn(result) {
     const { user, token } = result;
-    console.log('RESULT:', result);
     window.localStorage.setItem('user-jwt', token);
     this.setState({ user });
   }
