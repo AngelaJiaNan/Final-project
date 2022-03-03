@@ -42,7 +42,7 @@ Take a look for yourself and let me know your thoughts!
 # Getting Started
 1. Clone the repository
     ```shell
-    git clone https://github.com/angelajianan/Run-with-me
+    git clone git@github.com:AngelaJiaNan/Run-with-me.git
     cd Run-with-me
     ```
 3. Install all dependencies with NPM
