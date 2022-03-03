@@ -2,7 +2,7 @@
 
 A full stack JavaScript solo project.
 
-https://run-with-me7.herokuapp.com/#
+https://run-with-me7.herokuapp.com
 
 # Technologies Used
 - React.js
