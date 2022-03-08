@@ -1,6 +1,6 @@
 import React from 'react';
 import Listevents from './pages/listevents';
-import EventForm from './components/eventform';
+import EventForm from './components/event-form';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
 import NavBar from './components/nav';
