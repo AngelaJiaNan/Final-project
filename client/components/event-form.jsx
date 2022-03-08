@@ -1,6 +1,5 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
-import { Loader } from '@googlemaps/js-api-loader';
 import GoogleMapReact from 'google-map-react';
 import '../../node_modules/react-datepicker/dist/react-datepicker.css';
 
@@ -91,74 +90,74 @@ export default class EventForm extends React.Component {
   render() {
     return (
       <>
-      <div className='form-container'>
-        <form onSubmit={this.handleSubmit}>
-          <div className='form-inputs'>
-            <label>Event Title</label>
+        <div className='form-container'>
+          <form onSubmit={this.handleSubmit}>
+            <div className='form-inputs'>
+              <label>Event Title</label>
               <input
-              name="title"
-              type="text"
-              id="eventTitle"
-              value={this.state.title}
-              onChange={this.handleChange}/>
-          </div>
-          <div className='form-inputs'>
-            <label>Pick a Date</label>
+                name="title"
+                type="text"
+                id="eventTitle"
+                value={this.state.title}
+                onChange={this.handleChange} />
+            </div>
+            <div className='form-inputs'>
+              <label>Pick a Date</label>
               <DatePicker selected={this.state.date}
-               onChange={date => this.handleDate(date)}
+                onChange={date => this.handleDate(date)}
               />
-          </div>
-          <div className='form-inputs'>
-            <label>Starting Time</label>
+            </div>
+            <div className='form-inputs'>
+              <label>Starting Time</label>
               <input
-              name="startingtime"
-              type="time"
-              id="startingTime"
-              value={this.state.startingtime}
-              onChange={this.handleChange}/>
-          </div>
-          <div className='form-inputs'>
-            <label>Pick a Place</label>
+                name="startingtime"
+                type="time"
+                id="startingTime"
+                value={this.state.startingtime}
+                onChange={this.handleChange} />
+            </div>
+            <div className='form-inputs'>
+              <label>Pick a Place</label>
               <input
-              name="address"
-              type="text"
-              id="address"
-              value={this.state.address}
-              onChange={this.handleAddress}/>
-          </div>
-          <div className='form-inputs'>
-            <label>City</label>
+                name="address"
+                type="text"
+                id="address"
+                value={this.state.address}
+                onChange={this.handleAddress} />
+            </div>
+            <div className='form-inputs'>
+              <label>City</label>
               <input
-              name="city"
-              type="text"
-              id="city"
-              value={this.state.city}
-              onChange={this.handleCity}/>
-          </div>
-          <div className='form-inputs'>
-            <label>State</label>
+                name="city"
+                type="text"
+                id="city"
+                value={this.state.city}
+                onChange={this.handleCity} />
+            </div>
+            <div className='form-inputs'>
+              <label>State</label>
               <input
-              name="state"
-              type="text"
-              id="state"
-              value={this.state.state}
-              onChange={this.handleState}/>
-          </div>
-          <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
-              center={this.state.mapLocation}
-              defaultZoom={10}
-              yesIWantToUseGoogleMapApiInternals
-              onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
-            >
-            </GoogleMapReact>
-          </div>
-          <div className='submit-btn'>
-            <button type="submit">Create Event</button>
-          </div>
-      </form>
-      </div>
+                name="state"
+                type="text"
+                id="state"
+                value={this.state.state}
+                onChange={this.handleState} />
+            </div>
+            <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
+                center={this.state.mapLocation}
+                defaultZoom={10}
+                yesIWantToUseGoogleMapApiInternals
+                onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
+              >
+              </GoogleMapReact>
+            </div>
+            <div className='submit-btn'>
+              <button type="submit">Create Event</button>
+            </div>
+          </form>
+        </div>
       </>
     );
   }
