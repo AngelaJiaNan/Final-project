@@ -3,7 +3,7 @@ import Listevents from './pages/listevents';
 import EventForm from './components/eventform';
 import NotFound from './pages/not-found';
 import { parseRoute } from './lib';
-import NavBar from './components/navbar';
+import NavBar from './components/nav';
 import EventDetails from './pages/event-details';
 import EditEvent from './pages/edit-event';
 import Runninglog from './pages/runninglog';

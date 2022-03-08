@@ -27,16 +27,16 @@ export default class NavBar extends React.Component {
     const { user, handleSignOut } = this.context;
     return (
       <div className='row'>
-        <div onClick={this.handleMenuOpen}className='icon'>
+        <div onClick={this.handleMenuOpen} className='icon'>
           <i className='fas fa-running'></i>
         </div>
         <div className='header'>
           <h1>Run With Me</h1>
         </div>
-        <div onClick={this.handleMenuContent}className={`container ${hidden}`}>
+        <div onClick={this.handleMenuContent} className={`container ${hidden}`}>
           <nav className="menu-content">
             <a onClick={this.handleMenuContent} href='#eventpage'>Events</a>
-            <a onClick={this.handleMenuContent} href= '#runs'>Runs</a>
+            <a onClick={this.handleMenuContent} href='#runs'>Runs</a>
             <a onClick={this.handleMenuContent} href='#create'>Create Events</a>
             <div>
               {
