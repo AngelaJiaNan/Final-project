@@ -2,7 +2,7 @@
 
 A web application for runners who wants to run with others and track their own running progress.
 
-# 
+# Why
 
 ### Live Demo
 
