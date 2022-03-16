@@ -5,8 +5,7 @@
 .menu-content {
   line-height: 3rem;
   background-color: white;
-  font-size: 1rem;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .container {
@@ -20,7 +19,6 @@
 .header {
   margin: auto;
   width: 50%;
-  padding: 0.125rem;
   text-align: center;
 }
 
@@ -53,7 +51,7 @@ a {
 .form-container {
   margin: auto;
   padding: 1.875rem;
-  width: 60%;
+  width: 85%;
 }
 
 form {
@@ -99,11 +97,12 @@ label {
 
 .event-card {
   border: solid white;
-  width: 350px;
   height: 350px;
+  width: 350px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.4s;
   margin-top: 1.25rem;
+  margin-right: 1.5rem;
 }
 
 .event-card:hover {
@@ -141,7 +140,7 @@ h3 {
   border: solid white;
   margin: auto;
   padding: 0.625rem;
-  width: 60%;
+  width: 90%;
   margin-top: 2rem;
   box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -155,9 +154,8 @@ h3 {
   background-color: #007bff;
   border: none;
   color: white;
-  padding: 0.625rem 2rem;
+  padding: 0.5rem 1rem;
   text-decoration: none;
-  margin: 0.25rem 0.125rem;
   cursor: pointer;
 }
 
@@ -168,8 +166,7 @@ h3 {
 .event-btn {
   display: flex;
   justify-content: space-evenly;
-  gap: 12rem;
-  padding: 2rem;
+  gap: 2rem;
 }
 
 .delete-btn {
@@ -199,7 +196,7 @@ h3 {
 
 .delete-modal {
   background-color: white;
-  width: 40%;
+  width: 95%;
   height: 35%;
   border-radius: 1rem;
   padding: 3rem;
@@ -223,7 +220,7 @@ h3 {
 
 .form-modal {
   background-color: white;
-  width: 60%;
+  width: 85%;
   padding: 2rem;
   text-align: center;
   margin: 5% auto 15%;
@@ -245,7 +242,6 @@ h3 {
 .account-form {
   border: solid black;
   border-radius: 6px;
-  width: 40%;
   padding: 2rem;
   height: 60%;
 }
