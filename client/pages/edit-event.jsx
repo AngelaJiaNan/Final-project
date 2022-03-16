@@ -94,7 +94,7 @@ export default class EditEvent extends React.Component {
   handleUpdate(event) {
     const token = window.localStorage.getItem('user-jwt');
     event.preventDefault();
-    const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
+    const geolocation = `${this.state.event.address}, +${this.state.event.city}, +${this.state.event.state} `;
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)
       .then(response => response.json()).then(data => data.results[0].geometry.location).then(geoLatlon => {
         this.setState({ mapLocation: geoLatlon });

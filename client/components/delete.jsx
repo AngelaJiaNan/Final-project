@@ -9,11 +9,13 @@ export default class Delete extends React.Component {
   }
 
   handleDelete() {
+    const token = window.localStorage.getItem('user-jwt');
     event.preventDefault();
     fetch(`/api/events/${this.props.eventID}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
       }
     }).then(response => {
       if (!response.error) {
