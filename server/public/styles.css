@@ -28,6 +28,7 @@
   font-size: 2.5rem;
   padding-top: 1rem;
   padding-left: 1rem;
+  cursor: pointer;
 }
 
 .row {
@@ -217,6 +218,7 @@ h3 {
   padding-left: 0.438rem;
   font-size: 1.188rem;
   padding-top: 1.375rem;
+  cursor: pointer;
 }
 
 .form-modal {
@@ -261,6 +263,7 @@ h3 {
   color: red;
   padding-top: 0.5rem;
   padding-left: 0.5rem;
+  cursor: pointer;
 }
 
 .btn-container {
