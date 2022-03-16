@@ -121,7 +121,7 @@ app.get('/api/events/:eventID', (req, res, next) => {
 
 app.patch('/api/events/:eventID', (req, res, next) => {
   const eventID = parseInt(req.params.eventID);
-
+  const userID = req.user.userID;
   const { title, date, address, city, state, lat, lng, startingtime } = req.body.event;
   if (!Number.isInteger(eventID) || eventID <= 0) {
     res.status(400).json({ Error: 'invalid id' });
@@ -140,7 +140,7 @@ app.patch('/api/events/:eventID', (req, res, next) => {
     "lat" = $6,
     "lng" = $7,
     "startingtime" = $8
-  where "eventID" = $9
+  where "eventID" = $9 AND "userID" = ${userID}
   returning *
   `;
   const updatedValues = [title, date, address, city, state, lat, lng, startingtime, eventID];
@@ -159,12 +159,13 @@ app.patch('/api/events/:eventID', (req, res, next) => {
 
 app.delete('/api/events/:eventID', (req, res, next) => {
   const deleteId = Number(req.params.eventID);
+  const userID = req.user.userID;
   if (!Number.isInteger(deleteId)) {
     res.status(400).json({ Error: 'Invalid eventId' });
     return;
   }
   const sql = `delete from "events"
-                      where "eventID" = $1
+                      where "eventID" = $1 AND "userID" = ${userID}
                       returning *`;
   const values = [deleteId];
   db.query(sql, values)

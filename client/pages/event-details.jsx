@@ -66,11 +66,11 @@ export default class EventDetails extends React.Component {
               <p>Address: {modAddress}</p>
               <p>{cityState}</p>
             </div>
-            <div style={{ height: '40vh', width: '40%', padding: '10px', margin: 'auto' }}>
+            <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
               <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
                 center={mapCoordinates}
-                defaultZoom={9}
+                defaultZoom={15}
               >
               </GoogleMapReact>
             </div>
