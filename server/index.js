@@ -78,6 +78,25 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/events', (req, res, next) => {
+  const sql = `
+  select *
+  from "events"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/events/:eventID', (req, res, next) => {
+  const eventID = req.params.eventID;
+  const sql = 'select * from "events" where "eventID" = $1';
+  const params = [eventID];
+  db.query(sql, params)
+    .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.post('/api/events', (req, res, next) => {
@@ -98,25 +117,6 @@ app.post('/api/events', (req, res, next) => {
       console.error(error);
       res.status(500).json({ error: 'An unexpected error has occured' });
     });
-});
-
-app.get('/api/events', (req, res, next) => {
-  const sql = `
-  select *
-  from "events"
-  `;
-  db.query(sql)
-    .then(result => res.json(result.rows))
-    .catch(err => next(err));
-});
-
-app.get('/api/events/:eventID', (req, res, next) => {
-  const eventID = req.params.eventID;
-  const sql = 'select * from "events" where "eventID" = $1';
-  const params = [eventID];
-  db.query(sql, params)
-    .then(result => res.json(result.rows[0]))
-    .catch(err => next(err));
 });
 
 app.patch('/api/events/:eventID', (req, res, next) => {

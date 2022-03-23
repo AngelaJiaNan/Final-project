@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Delete from '../components/delete';
 
+const Marker = ({ text }) => <div>{text}</div>;
 export default class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -41,13 +42,21 @@ export default class EventDetails extends React.Component {
   render() {
     if (!this.state.event) return null;
     const { title, date, startingtime, address, city, state, lat, lng, eventID } = this.state.event;
-    const modlat = parseInt(lat);
-    const modlng = parseInt(lng);
+    const modlat = parseFloat(lat);
+    const modlng = parseFloat(lng);
     const mapCoordinates = { lat: modlat, lng: modlng };
     const modDate = date.split('T')[0];
     const modAddress = address.split('+').join(' ');
     const modCity = city.split('+').join(' ');
     const cityState = `${modCity}, ${state}`;
+    // const renderMarkers = (map, maps) => {
+    //   const marker = new maps.Marker({
+    //     position: mapCoordinates,
+    //     map,
+    //     title: 'Hello World!'
+    //   });
+    //   return marker;
+    // };
 
     return (
       <div>
@@ -70,8 +79,15 @@ export default class EventDetails extends React.Component {
               <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
                 center={mapCoordinates}
-                defaultZoom={15}
+                defaultZoom={12}
+                // yesIWantToUseGoogleMapApiInternals
+                // onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
               >
+                <Marker
+                  lat={modlat}
+                  lng={modlng}
+                  text="$$$ My Marker HERE $$$"
+                />
               </GoogleMapReact>
             </div>
           </div>
