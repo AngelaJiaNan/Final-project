@@ -2,7 +2,6 @@
 
 A web application for runners who wants to run with others and track their own running progress.
 
-# Why
 
 ### Live Demo
 
@@ -24,6 +23,7 @@ https://run-with-me9.herokuapp.com
 - Google geolocation API
 
 # Preview 
+![Kapture 2022-03-29 at 14 36 15](https://user-images.githubusercontent.com/90875226/160711516-f5bcfb2d-76af-49b5-a443-658b868c1eed.gif)
 
 # Features
 - User can create a account
