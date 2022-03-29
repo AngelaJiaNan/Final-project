@@ -1,6 +1,5 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
-import GoogleMapReact from 'google-map-react';
 import '../../node_modules/react-datepicker/dist/react-datepicker.css';
 
 export default class EventForm extends React.Component {
@@ -12,8 +11,7 @@ export default class EventForm extends React.Component {
       startingtime: '',
       address: '',
       city: '',
-      state: '',
-      mapLocation: { lat: 34, lng: -118 }
+      state: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,25 +30,24 @@ export default class EventForm extends React.Component {
 
   handleAddress(event) {
     const address = event.target.value;
-    const geoAddress = address.split(' ').join('+');
-    this.setState({ address: geoAddress });
+    this.setState({ address });
   }
 
   handleCity(event) {
     const city = event.target.value;
-    const geoCity = city.split(' ').join('+');
-    this.setState({ city: geoCity });
+    this.setState({ city });
   }
 
   handleState(event) {
     const state = event.target.value;
-    this.setState({ state: state });
+    this.setState({ state });
   }
 
   handleSubmit(event) {
     const token = window.localStorage.getItem('user-jwt');
     event.preventDefault();
-    const geolocation = `${this.state.address}, +${this.state.city}, +${this.state.state} `;
+    const geolocation = `${this.state.address},%20${this.state.city},%20${this.state.state}`;
+    // const geolocation = '2002%20maple%20ave%2C%20costa%20mesa%2C%20ca';
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${geolocation}&key=AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA`)
       .then(response => response.json()).then(data => data.results[0].geometry.location).then(geoLatlon => {
         this.setState({ mapLocation: geoLatlon });
@@ -142,16 +139,6 @@ export default class EventForm extends React.Component {
                 id="state"
                 value={this.state.state}
                 onChange={this.handleState} />
-            </div>
-            <div style={{ height: '50vh', width: '100%', padding: '20px' }}>
-              <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
-                center={this.state.mapLocation}
-                defaultZoom={10}
-                yesIWantToUseGoogleMapApiInternals
-                onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
-              >
-              </GoogleMapReact>
             </div>
             <div className='submit-btn'>
               <button type="submit">Create Event</button>

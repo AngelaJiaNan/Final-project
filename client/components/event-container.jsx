@@ -28,7 +28,10 @@ export default class EventContainer extends React.Component {
       <EventCard event={event} key={event.eventID}/>
     ));
     return (
+      <div>
+      { this.state.events.length === 0 && <div className='event-text'> This is Empty. Add a event! </div> }
       <ul className='allevents-container'>{allEvents}</ul>
+      </div>
     );
   }
 }
