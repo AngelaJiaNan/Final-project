@@ -72,6 +72,7 @@ export default class Runninglog extends React.Component {
           {this.state.showrunform && <RunForm togglerunform={this.togglerunform}/>}
       </div>
       <div>
+        { this.state.runninglogs.length === 0 && <div className='event-text'> This is Empty. Add a run! </div>}
           <ul className='allevents-container'>{listRuns}</ul>
       </div>
       </div>

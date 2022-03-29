@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Delete from '../components/delete';
 
-const Marker = ({ text }) => <div>{text}</div>;
+const Marker = () => <div><img src="/favicon.ico"/></div>;
 export default class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -49,14 +49,6 @@ export default class EventDetails extends React.Component {
     const modAddress = address.split('+').join(' ');
     const modCity = city.split('+').join(' ');
     const cityState = `${modCity}, ${state}`;
-    // const renderMarkers = (map, maps) => {
-    //   const marker = new maps.Marker({
-    //     position: mapCoordinates,
-    //     map,
-    //     title: 'Hello World!'
-    //   });
-    //   return marker;
-    // };
 
     return (
       <div>
@@ -80,13 +72,10 @@ export default class EventDetails extends React.Component {
                 bootstrapURLKeys={{ key: 'AIzaSyATRROv2KEQF0wX2e5OPR1CCbNaWFgrpcA' }}
                 center={mapCoordinates}
                 defaultZoom={12}
-                // yesIWantToUseGoogleMapApiInternals
-                // onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
               >
                 <Marker
                   lat={modlat}
                   lng={modlng}
-                  text="$$$ My Marker HERE $$$"
                 />
               </GoogleMapReact>
             </div>
