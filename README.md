@@ -3,10 +3,10 @@
 A web application for runners who wants to run with others and track their own running progress.
 
 
-### Live Demo
+# Live Demo
 
 Take a look for yourself and let me know your thoughts!
-https://run-with-me9.herokuapp.com
+[Click Me](https://run-with-me9.herokuapp.com)
 
 # Technologies Used
 - React.js
