@@ -28,7 +28,7 @@ Take a look for yourself and let me know your thoughts!
 # Features
 - User can create a account
 - User can create a event 
-- User can see location of the even though google map
+- User can see location of the event though google map
 - User can edit event 
 - User can delete event
 - User can log runs
