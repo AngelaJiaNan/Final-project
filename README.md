@@ -29,7 +29,7 @@ Take a look for yourself and let me know your thoughts!
 - User can create a account
 - User can create a event 
 - User can see location of the event though google map
-- User can edit event 
+- User can edit events 
 - User can delete event
 - User can log runs
 - User can delete runs
